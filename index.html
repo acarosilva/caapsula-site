@@ -296,28 +296,40 @@
         }, 150);
     });
 
-    // Reordered Language Matrix Engine (English -> Spanish -> German -> Japanese -> Chinese -> French -> Portuguese -> Italian)
+    // Language Matrix Engine (Arabic moved after French)
     const languages = [
         { status: "SYS_STATUS:", node: "NETWORK_NODE:", time: "SYS_TIME:" },               // 1. English
         { status: "ESTADO_SYS:", node: "NODO_RED:", time: "TIEMPO_SYS:" },                // 2. Spanish
         { status: "SYS_STATUS:", node: "NETZWERKKNOTEN:", time: "SYS_ZEIT:" },            // 3. German
-        { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },      // 4. Japanese
-        { status: "系统状态:", node: "网络节点:", time: "系统时间:" },                       // 5. Chinese
-        { status: "STATUT_SYS:", node: "NOEUD_RESEAU:", time: "TEMPS_SYS:" },             // 6. French
-        { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },               // 7. Portuguese
-        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" }                  // 8. Italian
+        { status: "STATUT_SYS:", node: "NOEUD_RESEAU:", time: "TEMPS_SYS:" },             // 4. French
+        { status: "حالة_النظام:", node: "عقدة_الشبكة:", time: "وقت_النظام:" },              // 5. Arabic (Moved here)
+        { status: "系统状态:", node: "网络节点:", time: "系统时间:" },                       // 6. Chinese
+        { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },      // 7. Japanese
+        { status: "시스템_상태:", node: "네트워크_노드:", time: "시스템_시간:" },              // 8. Korean
+        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },                 // 9. Italian
+        { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },       // 10. Greek
+        { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },               // 11. Portuguese
+        { status: "सिस्टम_स्थिति:", node: "नेटवर्क_नोड:", time: "सिस्टम_समय:" },              // 12. Hindi
+        { status: "СИС_СТАТУС:", node: "УЗЕЛ_СЕТИ:", time: "СИС_ВРЕМЯ:" },                // 13. Russian
+        { status: "สถานะ_ระบบ:", node: "โหนด_เครือข่าย:", time: "เวลา_ระบบ:" }               // 14. Thai
     ];
 
-    // Status strings matched completely to the reordered loop
+    // Status strings matched completely to the target cycle sequence
     const statusStringsByLanguage = [
         ["INITIALIZING_HANDSHAKE", "OPTIMIZING_TRANSACTIONS", "SECURED_PING_LOOP", "ESTABLISHING_METRICS"], // English
         ["INICIALIZANDO_ENLACE", "OPTIMIZANDO_TRANSACCIONES", "BUCLE_PING_SEGURO", "ESTABLECIENDO_METRICAS"], // Spanish
         ["INITIALISIERE_HANDSHAKE", "OPTIMIERE_TRANSAKTIONEN", "SICHERE_PING_SCHLEIFE", "METRIKEN_ERSTELLEN"], // German
-        ["ハンドシェイクを初期化中", "トランザクションを最適化中", "安全なピングループ", "メトリクスを確立中"], // Japanese
-        ["正在初始化握手", "正在优化交易", "安全连接循环", "正在建立度量标准"], // Chinese
         ["INITIALISATION_CONNEXION", "OPTIMISATION_TRANSACTIONS", "BOUCLE_PING_SECURISEE", "ETABLISSEMENT_METRIQUES"], // French
+        ["جاري_بدء_المصافحة", "جاري_تحسين_المعاملات", "حلقة_بينغ_آمنة", "تأسيس_المقاييس"], // Arabic
+        ["正在初始化握手", "正在优化交易", "安全连接循环", "正在建立度量标准"], // Chinese
+        ["ハンドシェイクを初期化中", "トランザクションを最適化中", "安全なピングループ", "メトリクスを確立中"], // Japanese
+        ["핸드셰이크_초기화중", "트랜잭션_최적화중", "보안_핑_루พ", "เมทริก_설정중"], // Korean
+        ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"], // Italian
+        ["ΑΡΧΙΚΟΠΟΙΗΣΗ_ΣΥΝΔΕΣΗΣ", "ΒΕΛΤΙΣΤΟΠΟΙΗΣΗ_ΣΥΝΑΛΛΑΓΩΝ", "ΑΣΦΑΛΗΣ_ΚΥΚΛΟΣ_PING", "ΚΑΘΟΡΙΣΜΟΣ_ΔΕΙΚΤΩΝ"], // Greek
         ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"], // Portuguese
-        ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"] // Italian
+        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_लूप", "मीट्रिक_स्थापना"], // Hindi
+        ["ИНИЦИАЛИЗАЦИЯ_СВЯЗИ", "ОПТИМИЗАЦИЯ_ТРАНЗАКЦИЙ", "ЗАЩИЩЕННЫЙ_ПИНГ_ЦИКЛ", "УСТАНОВКА_МЕТРИК"], // Russian
+        ["กำลังเริ่มการเชื่อมต่อ", "กำลังปรับปรุงธุรกรรม", "ระบบตรวจสอบเครือข่ายปลอดภัย", "กำลังตั้งค่าพารามิเตอร์"] // Thai
     ];
 
     let currentLangIndex = 0;
