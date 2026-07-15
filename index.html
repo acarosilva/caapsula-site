@@ -153,15 +153,15 @@
 
     <div class="system-console">
         <div class="metric-row">
-            <span>SYS_STATUS:</span>
+            <span id="label-status">SYS_STATUS:</span>
             <span class="highlight-text" id="terminal-status">RESOLVING_TUNNEL</span>
         </div>
         <div class="metric-row">
-            <span>NETWORK_NODE:</span>
+            <span id="label-node">NETWORK_NODE:</span>
             <span class="highlight-text" id="node-metric">40.112.98.02</span>
         </div>
         <div class="metric-row">
-            <span>SYS_TIME:</span>
+            <span id="label-time">SYS_TIME:</span>
             <span class="highlight-text" id="live-timestamp">00:00:00.00</span>
         </div>
     </div>
@@ -296,14 +296,63 @@
         }, 150);
     });
 
-    const statusStrings = ["INITIALIZING_HANDSHAKE", "OPTIMIZING_TRANSACTIONS", "SECURED_PING_LOOP", "ESTABLISHING_METRICS"];
+    // Reordered Language Matrix Engine (English -> Spanish -> German -> Japanese -> Chinese -> French -> Portuguese -> Italian)
+    const languages = [
+        { status: "SYS_STATUS:", node: "NETWORK_NODE:", time: "SYS_TIME:" },               // 1. English
+        { status: "ESTADO_SYS:", node: "NODO_RED:", time: "TIEMPO_SYS:" },                // 2. Spanish
+        { status: "SYS_STATUS:", node: "NETZWERKKNOTEN:", time: "SYS_ZEIT:" },            // 3. German
+        { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },      // 4. Japanese
+        { status: "系统状态:", node: "网络节点:", time: "系统时间:" },                       // 5. Chinese
+        { status: "STATUT_SYS:", node: "NOEUD_RESEAU:", time: "TEMPS_SYS:" },             // 6. French
+        { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },               // 7. Portuguese
+        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" }                  // 8. Italian
+    ];
+
+    // Status strings matched completely to the reordered loop
+    const statusStringsByLanguage = [
+        ["INITIALIZING_HANDSHAKE", "OPTIMIZING_TRANSACTIONS", "SECURED_PING_LOOP", "ESTABLISHING_METRICS"], // English
+        ["INICIALIZANDO_ENLACE", "OPTIMIZANDO_TRANSACCIONES", "BUCLE_PING_SEGURO", "ESTABLECIENDO_METRICAS"], // Spanish
+        ["INITIALISIERE_HANDSHAKE", "OPTIMIERE_TRANSAKTIONEN", "SICHERE_PING_SCHLEIFE", "METRIKEN_ERSTELLEN"], // German
+        ["ハンドシェイクを初期化中", "トランザクションを最適化中", "安全なピングループ", "メトリクスを確立中"], // Japanese
+        ["正在初始化握手", "正在优化交易", "安全连接循环", "正在建立度量标准"], // Chinese
+        ["INITIALISATION_CONNEXION", "OPTIMISATION_TRANSACTIONS", "BOUCLE_PING_SECURISEE", "ETABLISSEMENT_METRIQUES"], // French
+        ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"], // Portuguese
+        ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"] // Italian
+    ];
+
+    let currentLangIndex = 0;
+    let currentStatusIndex = 0;
+
+    // UI Label Elements
+    const labelStatusEl = document.getElementById('label-status');
+    const labelNodeEl = document.getElementById('label-node');
+    const labelTimeEl = document.getElementById('label-time');
+
+    // UI Dynamic Data Elements
     const statusEl = document.getElementById('terminal-status');
     const nodeEl = document.getElementById('node-metric');
     const timeEl = document.getElementById('live-timestamp');
 
     setInterval(() => {
-        statusEl.textContent = statusStrings[Math.floor(Math.random() * statusStrings.length)];
+        const currentLang = languages[currentLangIndex];
+        const statusPool = statusStringsByLanguage[currentLangIndex];
+
+        // 1. Update system labels and dynamic metrics in the current language
+        labelStatusEl.textContent = currentLang.status;
+        labelNodeEl.textContent = currentLang.node;
+        labelTimeEl.textContent = currentLang.time;
+
+        statusEl.textContent = statusPool[currentStatusIndex];
         nodeEl.textContent = `10.98.${Math.floor(Math.random() * 89 + 10)}.${Math.floor(Math.random() * 250)}`;
+
+        // 2. Cycle to the next string inside the current language pool
+        currentStatusIndex++;
+
+        // 3. When the current language completes its full loop cycle, shift to the next language
+        if (currentStatusIndex >= statusPool.length) {
+            currentStatusIndex = 0; // Reset text status loop
+            currentLangIndex = (currentLangIndex + 1) % languages.length; // Jump to next language
+        }
     }, 4000);
 
     function tickClock() {
