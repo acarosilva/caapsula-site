@@ -6,13 +6,167 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caapsula — Creative Technology Studio</title>
 <link rel="stylesheet" href="style.css">
+<style>
+    /* --- INFINITE LOADER OVERLAY BLOCK --- */
+    #stealth-loader-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #050505;
+        color: #ffffff;
+        font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, monospace;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        overflow: hidden;
+        perspective: 1200px;
+        
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Ambient network grid */
+    #stealth-loader-screen::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: 
+            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: center;
+        mask-image: radial-gradient(circle, black 25%, transparent 75%);
+        -webkit-mask-image: radial-gradient(circle, black 25%, transparent 75%);
+        pointer-events: none;
+    }
+
+    .logo-container {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 40px;
+        position: relative;
+        transform-style: preserve-3d;
+        z-index: 10;
+        cursor: pointer;
+        transition: transform 0.15s cubic-bezier(0.25, 1.8, 0.35, 1);
+    }
+
+    @media (min-width: 768px) {
+        .logo-container {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .logo-container.expanded {
+        transform: scale(1.18) translateZ(40px) !important;
+    }
+
+    .capsule-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95));
+        animation: fillAndSpinFull 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .capsule-bg {
+        fill: #111111;
+        stroke: #222222;
+        stroke-width: 1.5;
+    }
+
+    .system-console {
+        width: 280px;
+        font-size: 0.7rem;
+        color: #444444;
+        letter-spacing: 0.08em;
+        line-height: 1.8;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 16px;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .metric-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .highlight-text {
+        color: #888888;
+    }
+
+    @keyframes fillAndSpinFull {
+        0%, 65% { transform: rotate(0deg); }
+        90%, 100% { transform: rotate(360deg); }
+    }
+</style>
 </head>
 
-<body>
+<body style="overflow: hidden !important;">
 
+<!-- INFINITE GATE OVERLAY -->
+<div id="stealth-loader-screen">
+    <div class="logo-container" id="interactive-wrapper">
+        <svg class="capsule-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <clipPath id="liquid-clip">
+                    <rect id="mask-rect" x="0" y="220" width="220" height="0">
+                        <animate 
+                            attributeName="y" 
+                            values="220;0;0;220" 
+                            keyTimes="0;0.65;0.90;1" 
+                            dur="6s" 
+                            repeatCount="indefinite"
+                            calcMode="spline"
+                            keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1" />
+                        <animate 
+                            attributeName="height" 
+                            values="0;220;220;0" 
+                            keyTimes="0;0.65;0.90;1" 
+                            dur="6s" 
+                            repeatCount="indefinite"
+                            calcMode="spline"
+                            keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1" />
+                    </rect>
+                </clipPath>
+                <path id="pill-shape" d="M 110,10 C 160,10 185,38 185,82 L 185,103 L 135,103 L 135,76 C 135,54 125,43 110,43 C 95,43 85,54 85,76 L 85,144 C 85,166 95,177 110,177 C 125,177 135,166 135,144 L 135,107 L 185,107 L 185,138 C 185,182 160,210 110,210 C 60,210 35,182 35,138 L 35,82 C 35,38 60,10 110,10 Z" />
+            </defs>
+            <use href="#pill-shape" class="capsule-bg" />
+            <g clip-path="url(#liquid-clip)">
+                <use href="#pill-shape" fill="#FFDE00" />
+            </g>
+        </svg>
+    </div>
+
+    <div class="system-console">
+        <div class="metric-row">
+            <span>SYS_STATUS:</span>
+            <span class="highlight-text" id="terminal-status">RESOLVING_TUNNEL</span>
+        </div>
+        <div class="metric-row">
+            <span>NETWORK_NODE:</span>
+            <span class="highlight-text" id="node-metric">40.112.98.02</span>
+        </div>
+        <div class="metric-row">
+            <span>SYS_TIME:</span>
+            <span class="highlight-text" id="live-timestamp">00:00:00.00</span>
+        </div>
+    </div>
+</div>
+
+<!-- --- PERSISTENT ORIGINAL HIDDEN WEBSITE CONTENT --- -->
 <nav>
 <div class="logo">CAAPSULA</div>
-
 <div class="nav-links">
 <a href="#about">About</a>
 <a href="#work">Work</a>
@@ -22,139 +176,139 @@
 </nav>
 
 <section class="hero">
-
 <video autoplay muted loop playsinline class="hero-video">
 <source src="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4" type="video/mp4">
 </video>
-
 <div class="hero-overlay"></div>
-
 <div class="hero-content">
 <h1>Creative technology for immersive worlds</h1>
-
-<p>
-AI media · immersive environments · fashion technology · digital platforms
-</p>
-
+<p>AI media · immersive environments · fashion technology · digital platforms</p>
 <a class="cta" href="#work">Explore Work</a>
 </div>
-
 </section>
 
 <section id="about" class="section">
-
 <div class="text-block">
-
 <h2>About</h2>
-
-<p>
-Caapsula is a creative technology studio exploring the intersection
-of artificial intelligence, immersive media, fashion innovation,
-and digital platforms.
-</p>
-
-<p>
-The studio develops AI media systems, experiential environments,
-digital commerce platforms, and experimental technologies for
-culture, fashion, and entertainment.
-</p>
-
+<p>Caapsula is a creative technology studio exploring the intersection of artificial intelligence, immersive media, fashion innovation, and digital platforms.</p>
+<p>The studio develops AI media systems, experiential environments, digital commerce platforms, and experimental technologies for culture, fashion, and entertainment.</p>
 </div>
-
 </section>
 
 <section id="work" class="section dark">
-
 <h2 class="section-title">Selected Work</h2>
-
 <div class="work-grid">
-
 <div class="project">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4">
-</video>
+<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4"></video>
 <h3>AI Fashion Visual System</h3>
 <p>Generative visuals and virtual models for fashion storytelling.</p>
 </div>
-
 <div class="project">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-digital-art-7983/1080p.mp4">
-</video>
+<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-digital-art-7983/1080p.mp4"></video>
 <h3>AR Digital Collectibles</h3>
 <p>Blockchain artworks activating augmented reality experiences.</p>
 </div>
-
 <div class="project">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4">
-</video>
+<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4"></video>
 <h3>Luxury Ecommerce Experience</h3>
 <p>Customer-centric ecommerce platform integrating digital storytelling.</p>
 </div>
-
 <div class="project">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-dj-mixing-music-8291/1080p.mp4">
-</video>
+<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-dj-mixing-music-8291/1080p.mp4"></video>
 <h3>AI Live Visual Performance</h3>
 <p>Real-time generative visuals for immersive audiovisual shows.</p>
 </div>
-
 </div>
-
 </section>
 
 <section id="practices" class="section">
-
 <h2 class="section-title">Practices</h2>
-
 <div class="cap-grid">
-
 <div class="cap">
 <h3>AI Creative Systems</h3>
 <p>Generative visuals, virtual models, AI music, and synthetic media.</p>
 </div>
-
 <div class="cap">
 <h3>Fashion Technology</h3>
 <p>AI fashion campaigns, virtual models, and material innovation.</p>
 </div>
-
 <div class="cap">
 <h3>Immersive Environments</h3>
 <p>Projection mapping, installations, and spatial media experiences.</p>
 </div>
-
 <div class="cap">
 <h3>Digital Platforms</h3>
 <p>Ecommerce systems, CX platforms, and interactive brand websites.</p>
 </div>
-
 <div class="cap">
 <h3>Digital Collectibles</h3>
 <p>AR artworks, NFTs, and blockchain digital media.</p>
 </div>
-
 </div>
-
 </section>
 
 <section id="contact" class="section dark">
-
 <h2>Contact</h2>
-
-<p class="contact-email">
-hola@caapsula.com
-</p>
-
-<a class="cta" href="mailto:hola@caapsula.com">
-Start a Project
-</a>
-
+<p class="contact-email">hola@caapsula.com</p>
+<a class="cta" href="mailto:hola@caapsula.com">Start a Project</a>
 </section>
 
 <script src="script.js"></script>
+
+<!-- INTERACTIONS & TRACKING UTILITIES -->
+<script>
+    const wrapper = document.getElementById('interactive-wrapper');
+
+    function handleMove(e) {
+        const x = e.clientX || e.touches[0].clientX;
+        const y = e.clientY || e.touches[0].clientY;
+        const offsetX = (x - window.innerWidth / 2) / (window.innerWidth / 2);
+        const offsetY = (y - window.innerHeight / 2) / (window.innerHeight / 2);
+        
+        if (!wrapper.classList.contains('expanded')) {
+            wrapper.style.transform = `translate(${offsetX * 25}px, ${offsetY * 25}px) rotateY(${offsetX * 15}deg) rotateX(${offsetY * -15}deg)`;
+        }
+    }
+
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('touchmove', handleMove, { passive: true });
+    
+    function handleReset() {
+        if (!wrapper.classList.contains('expanded')) {
+            wrapper.style.transform = 'translate(0px, 0px) rotateY(0deg) rotateX(0deg)';
+        }
+    }
+    window.addEventListener('mouseleave', handleReset);
+    window.addEventListener('touchend', handleReset);
+
+    wrapper.addEventListener('click', () => {
+        if (wrapper.classList.contains('expanded')) return;
+        
+        wrapper.classList.add('expanded');
+        
+        setTimeout(() => {
+            wrapper.classList.remove('expanded');
+            handleReset();
+        }, 150);
+    });
+
+    const statusStrings = ["INITIALIZING_HANDSHAKE", "OPTIMIZING_TRANSACTIONS", "SECURED_PING_LOOP", "ESTABLISHING_METRICS"];
+    const statusEl = document.getElementById('terminal-status');
+    const nodeEl = document.getElementById('node-metric');
+    const timeEl = document.getElementById('live-timestamp');
+
+    setInterval(() => {
+        statusEl.textContent = statusStrings[Math.floor(Math.random() * statusStrings.length)];
+        nodeEl.textContent = `10.98.${Math.floor(Math.random() * 89 + 10)}.${Math.floor(Math.random() * 250)}`;
+    }, 4000);
+
+    function tickClock() {
+        const now = new Date();
+        timeEl.textContent = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0').slice(0, 2);
+        requestAnimationFrame(tickClock);
+    }
+    requestAnimationFrame(tickClock);
+</script>
 
 </body>
 </html>
