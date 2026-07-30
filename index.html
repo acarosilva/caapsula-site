@@ -7,6 +7,10 @@
 <meta name="format-detection" content="telephone=no">
 <title id="page-title">CAAPSULA — Culture-driven Technologies</title>
 
+<!-- DNS Preconnects para optimizar la carga de red -->
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://cdn.coverr.co">
+
 <!-- Tailwind CSS CDN for Creme Digital Aesthetics -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -343,6 +347,18 @@
 
 <body class="relative min-h-screen selection:bg-[#FFDE00] selection:text-black" style="overflow: hidden;">
 
+<!-- SVG SPRITES PARA OPTIMIZACIÓN DE RENDIMIENTO -->
+<svg style="display: none;" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <symbol id="flag-us" viewBox="0 0 640 480">
+            <path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/>
+        </symbol>
+        <symbol id="flag-mx" viewBox="0 0 900 500">
+            <path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/>
+        </symbol>
+    </defs>
+</svg>
+
 <!-- 1. INFINITE GATE OVERLAY SCREEN WITH 20-CLICK BYPASS -->
 <div id="stealth-loader-screen">
     <div class="logo-container" id="interactive-wrapper" title="Click 20 times to bypass loader">
@@ -431,10 +447,10 @@
                     Book a Call
                 </button>
                 
-                <!-- Desktop Language Dropdown Component with SVG Flags (Mexico / USA) -->
+                <!-- Desktop Language Dropdown Component with Pre-optimized SVG Sprites -->
                 <div class="relative">
                     <button onclick="toggleLangDropdown()" id="lang-btn" class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-full border border-white/10 hover:bg-white/20 transition-all focus:outline-none">
-                        <svg class="w-4 h-3 rounded-sm object-cover shadow-sm" id="desktop-flag" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>
+                        <svg class="w-4 h-3 rounded-sm object-cover shadow-sm"><use href="#flag-us"></use></svg>
                         <span class="text-[11px] font-bold uppercase tracking-wider text-white" id="current-lang-label">EN</span>
                         <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>
                     </button>
@@ -442,14 +458,14 @@
                     <div id="lang-dropdown" class="absolute right-0 mt-2 w-36 bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                         <button onclick="switchLanguage('EN')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-us"></use></svg> 
                                 English
                             </span>
                             <span class="text-[10px] text-amber-400" id="check-en">✓</span>
                         </button>
                         <button onclick="switchLanguage('ES')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-mx"></use></svg> 
                                 Español
                             </span>
                             <span class="text-[10px] text-amber-400 hidden" id="check-es">✓</span>
@@ -497,7 +513,7 @@
         <div class="relative">
             <button onclick="toggleMobileLangDropdown()" id="mobile-lang-btn" class="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 transition-all">
                 <div class="flex items-center gap-3">
-                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>
+                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm"><use href="#flag-us"></use></svg>
                     <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">English (US)</span>
                 </div>
                 <span class="text-sm text-gray-400 font-bold transition-transform duration-200" id="mobile-lang-arrow">▼</span>
@@ -506,13 +522,13 @@
             <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                 <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg> 
+                        <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-us"></use></svg> 
                         English (US)
                     </span>
                 </button>
                 <button onclick="switchLanguage('ES');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg> 
+                        <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-mx"></use></svg> 
                         Español (MX)
                     </span>
                 </button>
@@ -605,7 +621,7 @@
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Client Funding" data-es="Financiamiento de Clientes">Client Funding</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
-                    $15M+
+                    <span data-en="$15M+" data-es="$15M+">$15M+</span>
                 </div>
             </div>
 
@@ -629,29 +645,30 @@
                 <div class="animate-marquee items-center gap-16 text-gray-400 font-bold text-xl uppercase tracking-widest">
                     
                     <!-- First Set of Logos -->
+                    <!-- Carga diferida en logos usando loading="lazy" y decoding="async" -->
                     <div class="flex items-center gap-16 shrink-0 h-10">
-                        <img src="adidas-13.png" alt="Adidas" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="bbva-2.png" alt="BBVA" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="coca-cola-2021 (1).png" alt="Coca-Cola" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="Conde_Nast_logo.png" alt="Condé Nast" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="meta-3.png" alt="Meta" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="netflix-3.png" alt="Netflix" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="ORGANIZACION_GRUPO_BIMBO-01.png" alt="Grupo Bimbo" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="redbullenergydrink.png" alt="Red Bull" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="adidas-13.png" alt="Adidas" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="bbva-2.png" alt="BBVA" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="coca-cola-2021 (1).png" alt="Coca-Cola" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="Conde_Nast_logo.png" alt="Condé Nast" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="meta-3.png" alt="Meta" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="netflix-3.png" alt="Netflix" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="ORGANIZACION_GRUPO_BIMBO-01.png" alt="Grupo Bimbo" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="redbullenergydrink.png" alt="Red Bull" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                     </div>
 
                     <!-- Duplicate Set for Seamless Loop -->
                     <div class="flex items-center gap-16 shrink-0 h-10">
-                        <img src="adidas-13.png" alt="Adidas" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="bbva-2.png" alt="BBVA" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="coca-cola-2021 (1).png" alt="Coca-Cola" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="Conde_Nast_logo.png" alt="Condé Nast" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="meta-3.png" alt="Meta" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="netflix-3.png" alt="Netflix" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="ORGANIZACION_GRUPO_BIMBO-01.png" alt="Grupo Bimbo" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="redbullenergydrink.png" alt="Red Bull" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
-                        <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="adidas-13.png" alt="Adidas" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="bbva-2.png" alt="BBVA" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="coca-cola-2021 (1).png" alt="Coca-Cola" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="Conde_Nast_logo.png" alt="Condé Nast" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="meta-3.png" alt="Meta" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="netflix-3.png" alt="Netflix" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="ORGANIZACION_GRUPO_BIMBO-01.png" alt="Grupo Bimbo" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="redbullenergydrink.png" alt="Red Bull" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                     </div>
 
                 </div>
@@ -829,7 +846,8 @@
             
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
-                    <video autoplay muted loop playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <!-- Optimización en videos secundarios (preload=none) -->
+                    <video autoplay muted loop playsinline preload="none" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <source src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4">
                     </video>
                 </div>
@@ -841,7 +859,8 @@
 
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
-                    <video autoplay muted loop playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <!-- Optimización en videos secundarios (preload=none) -->
+                    <video autoplay muted loop playsinline preload="none" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <source src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4">
                     </video>
                 </div>
@@ -1107,8 +1126,8 @@
 
     /* --- LANGUAGE DROPDOWN CONTROLS & LIVE TRANSLATION ENGINE --- */
     let currentLang = 'EN';
-    const usFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>`;
-    const mexicoFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg>`;
+    const usFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><use href="#flag-us"></use></svg>`;
+    const mexicoFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><use href="#flag-mx"></use></svg>`;
 
     function toggleLangDropdown() {
         const dropdown = document.getElementById('lang-dropdown');
@@ -1128,22 +1147,22 @@
         currentLang = lang;
         const langBtn = document.getElementById('lang-btn');
         const mobileBtnText = document.getElementById('mobile-lang-text');
-        const mobileFlagIcon = document.getElementById('mobile-flag-icon');
+        const mobileFlagIconContainer = document.getElementById('mobile-lang-btn').querySelector('.gap-3');
         const checkEn = document.getElementById('check-en');
         const checkEs = document.getElementById('check-es');
         const footerInput = document.getElementById('footer-input');
 
         if (lang === 'ES') {
             langBtn.innerHTML = `${mexicoFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">ES</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
-            mobileBtnText.textContent = "Español (ES)";
-            mobileFlagIcon.outerHTML = `<svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg>`;
+            mobileBtnText.textContent = "Español (MX)";
+            mobileFlagIconContainer.innerHTML = `${mexicoFlagSvg} <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">Español (MX)</span>`;
             checkEn.classList.add('hidden');
             checkEs.classList.remove('hidden');
             if(footerInput) footerInput.placeholder = "Ingresa tu correo...";
         } else {
             langBtn.innerHTML = `${usFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">EN</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
             mobileBtnText.textContent = "English (US)";
-            mobileFlagIcon.outerHTML = `<svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>`;
+            mobileFlagIconContainer.innerHTML = `${usFlagSvg} <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">English (US)</span>`;
             checkEs.classList.add('hidden');
             checkEn.classList.remove('hidden');
             if(footerInput) footerInput.placeholder = "Enter email...";
@@ -1201,8 +1220,8 @@
         { status: "حالة_النظام:", node: "عقدة_الشبكة:", time: "وقت_النظام:" },
         { status: "系统状态:", node: "网络节点:", time: "系统时间:" },
         { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },
-        { status: "システム_상태:", node: "네트워크_노드:", time: "시스템_시간:" },
-        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPS_SYS:" },
+        { status: "システム_상태:", node: "네트워크_노드:", time: "システム_시간:" },
+        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },
         { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },
         { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },
         { status: "सिस्टम_स्थिति:", node: "नेटवर्क_नोड:", time: "सिस्टम_समय:" },
