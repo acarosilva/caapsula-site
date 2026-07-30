@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
-<title>CAAPSULA — Culture-driven Technologies</title>
+<title id="page-title">CAAPSULA — Culture-driven Technologies</title>
 
 <!-- Tailwind CSS CDN for Creme Digital Aesthetics -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -37,7 +37,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100dvh; /* Uses dynamic viewport height to completely cover mobile screens */
+        height: 100dvh;
         background-color: #050505;
         color: #ffffff;
         font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, monospace;
@@ -232,6 +232,18 @@
             background-color: #111116 !important;
             color: #ffffff !important;
         }
+
+        /* Scrolled state adjustment for language button text */
+        body.nav-scrolled #lang-btn {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+        body.nav-scrolled #current-lang-label {
+            color: #111116 !important;
+        }
+        body.nav-scrolled #lang-arrow {
+            color: #6b7280 !important;
+        }
     }
 
     /* Mobile Specific Scrolled Burger Button Settings */
@@ -406,17 +418,45 @@
         </a>
 
         <!-- Center Navigation Pill -->
-        <div id="center-nav-pill" class="flex items-center gap-6">
+        <div id="center-nav-pill" class="flex items-center gap-4">
             <nav class="hidden md:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider text-gray-300">
-                <a href="#about" class="nav-link transition-colors">About</a>
-                <a href="#services" class="nav-link transition-colors">Services</a>
-                <a href="#work" class="nav-link transition-colors">Work</a>
-                <a href="#faq" class="nav-link transition-colors">FAQ</a>
+                <a href="#about" class="nav-link transition-colors" data-en="About" data-es="Acerca de">About</a>
+                <a href="#services" class="nav-link transition-colors" data-en="Services" data-es="Servicios">Services</a>
+                <a href="#work" class="nav-link transition-colors" data-en="Work" data-es="Trabajo">Work</a>
+                <a href="#faq" class="nav-link transition-colors" data-en="FAQ" data-es="Preguntas">FAQ</a>
             </nav>
 
-            <button onclick="openBookingModal()" class="cta-btn hidden sm:inline-block px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-white text-black hover:bg-gray-200 transition-all duration-300 shadow-sm">
-                Book a Call
-            </button>
+            <div class="hidden sm:flex items-center gap-3">
+                <button onclick="openBookingModal()" class="cta-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-white text-black hover:bg-gray-200 transition-all duration-300 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">
+                    Book a Call
+                </button>
+                
+                <!-- Desktop Language Dropdown Component with SVG Flags (Spain / USA) -->
+                <div class="relative">
+                    <button onclick="toggleLangDropdown()" id="lang-btn" class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-full border border-white/10 hover:bg-white/20 transition-all focus:outline-none">
+                        <svg class="w-4 h-3 rounded-sm object-cover shadow-sm" id="desktop-flag" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-white" id="current-lang-label">EN</span>
+                        <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div id="lang-dropdown" class="absolute right-0 mt-2 w-36 bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
+                        <button onclick="switchLanguage('EN')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg> 
+                                English
+                            </span>
+                            <span class="text-[10px] text-amber-400" id="check-en">✓</span>
+                        </button>
+                        <button onclick="switchLanguage('ES')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg> 
+                                Español
+                            </span>
+                            <span class="text-[10px] text-amber-400 hidden" id="check-es">✓</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Mobile Burger Toggle Button -->
@@ -442,16 +482,43 @@
     </div>
 
     <nav class="flex flex-col gap-6 text-2xl font-bold">
-        <a href="#about" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">About</a>
-        <a href="#services" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">Services & Pricing</a>
-        <a href="#work" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">Explore Work</a>
-        <a href="#faq" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">FAQs</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors" data-en="About" data-es="Acerca de">About</a>
+        <a href="#services" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors" data-en="Services & Pricing" data-es="Servicios y Precios">Services & Pricing</a>
+        <a href="#work" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors" data-en="Explore Work" data-es="Explorar Trabajo">Explore Work</a>
+        <a href="#faq" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors" data-en="FAQs" data-es="Preguntas Frecuentes">FAQs</a>
     </nav>
 
     <div class="space-y-4">
-        <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full py-4 rounded-full bg-[#FFDE00] text-black font-bold text-sm hover:bg-[#e6c800] transition-colors">
+        <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full py-4 rounded-full bg-[#FFDE00] text-black font-bold text-sm hover:bg-[#e6c800] transition-colors" data-en="Book a Call" data-es="Agendar Llamada">
             Book a Call
         </button>
+        
+        <!-- Mobile Language Selector Accordion -->
+        <div class="relative">
+            <button onclick="toggleMobileLangDropdown()" id="mobile-lang-btn" class="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 transition-all">
+                <div class="flex items-center gap-3">
+                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>
+                    <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">English (US)</span>
+                </div>
+                <span class="text-sm text-gray-400 font-bold transition-transform duration-200" id="mobile-lang-arrow">▼</span>
+            </button>
+            <!-- Mobile Dropdown Menu -->
+            <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
+                <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg> 
+                        English (US)
+                    </span>
+                </button>
+                <button onclick="switchLanguage('ES');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg> 
+                        Español (ES)
+                    </span>
+                </button>
+            </div>
+        </div>
+
         <p class="text-xs text-gray-500 text-center">&copy; CAAPSULA Corp.</p>
     </div>
 </div>
@@ -464,23 +531,23 @@
         <div class="grid md:grid-cols-12 gap-12 items-center">
             
             <div class="md:col-span-7 space-y-8">
-                <div class="inline-flex items-center px-3.5 py-1.5 rounded-full creme-card text-xs text-gray-600 tracking-wide uppercase font-semibold">
+                <div class="inline-flex items-center px-3.5 py-1.5 rounded-full creme-card text-xs text-gray-600 tracking-wide uppercase font-semibold" data-en="Culture-Driven Technology Studio" data-es="Estudio de Tecnología Impulsado por la Cultura">
                     Culture-Driven Technology Studio
                 </div>
                 
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.08]">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.08]" data-en="We'll build your idea into a ready to launch platform in 2-weeks" data-es="Convertimos tu idea en una plataforma lista para lanzar en 2 semanas">
                     We'll build your idea into a ready to launch platform in 2-weeks
                 </h1>
                 
-                <p class="text-lg text-gray-500 font-normal max-w-xl leading-relaxed">
+                <p class="text-lg text-gray-500 font-normal max-w-xl leading-relaxed" data-en="The culture-first product studio — trusted by startups and founders to design, build, and launch high-impact digital platforms that scale." data-es="El estudio de producto enfocado en cultura, confiado por startups y fundadores para diseñar, construir y lanzar plataformas digitales de alto impacto que escalan.">
                     The culture-first product studio — trusted by startups and founders to design, build, and launch high-impact digital platforms that scale.
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-2">
                     <button onclick="openBookingModal()" class="bg-gray-900 text-white font-medium text-sm px-8 py-4 rounded-full hover:bg-black transition-all duration-200 shadow-md flex items-center gap-2">
-                        <span>›</span> Book a Call
+                        <span>›</span> <span data-en="Book a Call" data-es="Agendar Llamada">Book a Call</span>
                     </button>
-                    <a href="#services" class="creme-card text-gray-900 font-medium text-sm px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-200">
+                    <a href="#services" class="creme-card text-gray-900 font-medium text-sm px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-200" data-en="View Pricing" data-es="Ver Precios">
                         View Pricing
                     </a>
                 </div>
@@ -496,7 +563,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                         <div class="absolute bottom-6 left-6 right-6 space-y-1">
                             <span class="text-xs uppercase tracking-widest text-white/80 font-semibold">CAAPSULA</span>
-                            <h3 class="text-xl font-bold text-white">Culture x Technology</h3>
+                            <h3 class="text-xl font-bold text-white" data-en="Culture x Technology" data-es="Cultura x Tecnología">Culture x Technology</h3>
                         </div>
                     </div>
                 </div>
@@ -509,11 +576,11 @@
     <section id="about" class="max-w-7xl mx-auto px-6 page-section">
         <div class="creme-card rounded-3xl p-8 md:p-16 relative overflow-hidden bg-white">
             <div class="max-w-3xl space-y-6">
-                <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">About CAAPSULA</span>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-snug">
+                <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="About CAAPSULA" data-es="Acerca de CAAPSULA">About CAAPSULA</span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-snug" data-en="Move faster with AI-powered platform architecture" data-es="Avanza más rápido con arquitectura de plataforma impulsada por IA">
                     Move faster with AI-powered platform architecture
                 </h2>
-                <p class="text-gray-600 text-lg leading-relaxed pt-2">
+                <p class="text-gray-600 text-lg leading-relaxed pt-2" data-en="CAAPSULA is an AI product studio that builds, designs, and launches digital platforms, e-commerce systems, and custom agents combining modern automation with engineering best practices." data-es="CAAPSULA es un estudio de productos de IA que construye, diseña y lanza plataformas digitales, sistemas de comercio electrónico y agentes personalizados combinando automatización moderna con las mejores prácticas de ingeniería.">
                     CAAPSULA is an AI product studio that builds, designs, and launches digital platforms, e-commerce systems, and custom agents combining modern automation with engineering best practices.
                 </p>
             </div>
@@ -528,25 +595,25 @@
             
             <!-- Stat 1 -->
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
-                <span class="text-xs font-semibold text-gray-500 tracking-tight">Products Built</span>
+                <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Products Built" data-es="Productos Creados">Products Built</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
-                    200+
+                    50+
                 </div>
             </div>
 
             <!-- Stat 2 -->
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
-                <span class="text-xs font-semibold text-gray-500 tracking-tight">Client Funding</span>
+                <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Client Funding" data-es="Financiamiento de Clientes">Client Funding</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
-                    $25M+
+                    $15M+
                 </div>
             </div>
 
             <!-- Stat 3 -->
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
-                <span class="text-xs font-semibold text-gray-500 tracking-tight">Total VC investments in our clients</span>
+                <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Total VC investments in our clients" data-es="Inversiones VC totales en nuestros clientes">Total VC investments in our clients</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
-                    80+
+                    10+
                 </div>
             </div>
 
@@ -554,7 +621,7 @@
 
         <!-- Moving Brand Logo Carousel -->
         <div class="space-y-8 pt-4">
-            <p class="text-center text-xs font-semibold text-gray-400 tracking-wide uppercase">
+            <p class="text-center text-xs font-semibold text-gray-400 tracking-wide uppercase" data-en="Trusted by industry leaders" data-es="Con la confianza de líderes de la industria">
                 Trusted by industry leaders
             </p>
 
@@ -596,12 +663,12 @@
     <!-- SERVICES & OFFERINGS SECTION -->
     <section id="services" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
         <div class="text-center max-w-2xl mx-auto space-y-3">
-            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Flexible Pricing</span>
+            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Flexible Pricing" data-es="Precios Flexibles">Flexible Pricing</span>
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
-                <div>Our Pricing.</div>
-                <div class="text-gray-400 font-normal">Your dedicated tech team.</div>
+                <div data-en="Our Pricing." data-es="Nuestros Precios.">Our Pricing.</div>
+                <div class="text-gray-400 font-normal" data-en="Your dedicated tech team." data-es="Tu equipo técnico dedicado.">Your dedicated tech team.</div>
             </h2>
-            <p class="text-gray-500 text-sm pt-2">Flexible pricing options designed to match your exact business stage.</p>
+            <p class="text-gray-500 text-sm pt-2" data-en="Flexible pricing options designed to match your exact business stage." data-es="Opciones de precios flexibles diseñadas para adaptarse exactamente a tu etapa de negocio.">Flexible pricing options designed to match your exact business stage.</p>
         </div>
 
         <!-- CENTERED FLEX/GRID CONTAINER -->
@@ -612,28 +679,28 @@
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🌐</div>
                     <div class="space-y-1">
-                        <h3 class="text-2xl font-bold text-gray-900">Online Presence</h3>
-                        <p class="text-xs text-gray-400 font-medium">Full Website Scratch Build</p>
+                        <h3 class="text-2xl font-bold text-gray-900" data-en="Online Presence" data-es="Presencia en Línea">Online Presence</h3>
+                        <p class="text-xs text-gray-400 font-medium" data-en="Full Website Scratch Build" data-es="Sitio Web Completo desde Cero">Full Website Scratch Build</p>
                     </div>
-                    <p class="text-gray-500 text-xs leading-relaxed">
+                    <p class="text-gray-500 text-xs leading-relaxed" data-en="For creators and businesses launching an online identity from ground zero." data-es="Para creadores y negocios que lanzan una identidad en línea desde cero.">
                         For creators and businesses launching an online identity from ground zero.
                     </p>
                     
                     <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
-                        $1,500 <span class="text-xs text-gray-400 font-normal opacity-80">/ One-time</span>
+                        $1,500 <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ One-time" data-es="/ Único pago">/ One-time</span>
                     </div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
-                        <span class="text-xs font-semibold text-gray-900">What's included:</span>
+                        <span class="text-xs font-semibold text-gray-900" data-en="What's included:" data-es="Qué incluye:">What's included:</span>
                         <ul class="text-xs text-gray-600 space-y-2.5">
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Fully launched web platform</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Complete Figma design tokens</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Search Engine Optimization (SEO)</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> ChatGPT & AI Generative Positioning</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Fully launched web platform" data-es="Plataforma web totalmente lanzada">Fully launched web platform</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Complete Figma design tokens" data-es="Tokens de diseño completos en Figma">Complete Figma design tokens</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Search Engine Optimization (SEO)" data-es="Optimización de Motores de Búsqueda (SEO)">Search Engine Optimization (SEO)</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="ChatGPT & AI Generative Positioning" data-es="Posicionamiento Generativo en ChatGPT e IA">ChatGPT & AI Generative Positioning</span></li>
                         </ul>
                     </div>
                 </div>
-                <button onclick="openBookingModal('Online Presence ($1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm">Book a Call</button>
+                <button onclick="openBookingModal('Online Presence ($1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
             </div>
 
             <!-- Card 2: E-Commerce & Apps -->
@@ -641,28 +708,28 @@
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">⚡</div>
                     <div class="space-y-1">
-                        <h3 class="text-2xl font-bold text-gray-900">E-Commerce & Apps</h3>
-                        <p class="text-xs text-gray-400 font-medium">Digital Commerce & Mobile</p>
+                        <h3 class="text-2xl font-bold text-gray-900" data-en="E-Commerce & Apps" data-es="E-Commerce y Apps">E-Commerce & Apps</h3>
+                        <p class="text-xs text-gray-400 font-medium" data-en="Digital Commerce & Mobile" data-es="Comercio Digital y Móvil">Digital Commerce & Mobile</p>
                     </div>
-                    <p class="text-gray-500 text-xs leading-relaxed">
+                    <p class="text-gray-500 text-xs leading-relaxed" data-en="Full working commerce platform or native mobile app ready to scale." data-es="Plataforma de comercio funcional o aplicación móvil nativa lista para escalar.">
                         Full working commerce platform or native mobile app ready to scale.
                     </p>
                     
                     <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
-                        <span class="text-xs text-gray-400 font-normal">From</span> $2,500 <span class="text-xs text-gray-400 font-normal opacity-80">/ One-time</span>
+                        <span class="text-xs text-gray-400 font-normal" data-en="From" data-es="Desde">From</span> $2,500 <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ One-time" data-es="/ Único pago">/ One-time</span>
                     </div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
-                        <span class="text-xs font-semibold text-gray-900">What's included:</span>
+                        <span class="text-xs font-semibold text-gray-900" data-en="What's included:" data-es="Qué incluye:">What's included:</span>
                         <ul class="text-xs text-gray-600 space-y-2.5">
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Shopify, Tiendanube, or Custom Infra</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Native Mobile Application Builds</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Payment gateway integration</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Product design & Figma components</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Shopify, Tiendanube, or Custom Infra" data-es="Shopify, Tiendanube o Infraestructura a medida">Shopify, Tiendanube, or Custom Infra</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Native Mobile Application Builds" data-es="Construcción de Apps Móviles Nativas">Native Mobile Application Builds</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Payment gateway integration" data-es="Integración de pasarela de pagos">Payment gateway integration</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Product design & Figma components" data-es="Diseño de producto y componentes Figma">Product design & Figma components</span></li>
                         </ul>
                     </div>
                 </div>
-                <button onclick="openBookingModal('E-Commerce & Mobile Apps (From $2,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm">Book a Call</button>
+                <button onclick="openBookingModal('E-Commerce & Mobile Apps (From $2,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
             </div>
 
             <!-- Card 3: Product Sprints -->
@@ -670,27 +737,27 @@
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🚀</div>
                     <div class="space-y-1">
-                        <h3 class="text-2xl font-bold text-gray-900">Product Sprints</h3>
-                        <p class="text-xs text-gray-400 font-medium">Idea-to-Prototype Execution</p>
+                        <h3 class="text-2xl font-bold text-gray-900" data-en="Product Sprints" data-es="Sprints de Producto">Product Sprints</h3>
+                        <p class="text-xs text-gray-400 font-medium" data-en="Idea-to-Prototype Execution" data-es="Ejecución de Idea a Prototipo">Idea-to-Prototype Execution</p>
                     </div>
-                    <p class="text-gray-500 text-xs leading-relaxed">
+                    <p class="text-gray-500 text-xs leading-relaxed" data-en="Turn raw concepts into tangible, working prototypes in 14 days." data-es="Convierte conceptos en prototipos tangibles y funcionales en 14 días.">
                         Turn raw concepts into tangible, working prototypes in 14 days.
                     </p>
                     
                     <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
-                        <span class="text-xs text-gray-400 font-normal">From</span> $1,500 <span class="text-xs text-gray-400 font-normal opacity-80">/ Sprint</span>
+                        <span class="text-xs text-gray-400 font-normal" data-en="From" data-es="Desde">From</span> $1,500 <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ Sprint" data-es="/ Sprint">/ Sprint</span>
                     </div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
-                        <span class="text-xs font-semibold text-gray-900">Sprint focus:</span>
+                        <span class="text-xs font-semibold text-gray-900" data-en="Sprint focus:" data-es="Enfoque del sprint:">Sprint focus:</span>
                         <ul class="text-xs text-gray-600 space-y-2.5">
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Rapid wireframing & interactive prototypes</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Technical architecture & stack roadmap</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> MVP scoping & feature prioritization</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Rapid wireframing & interactive prototypes" data-es="Wireframing rápido y prototipos interactivos">Rapid wireframing & interactive prototypes</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Technical architecture & stack roadmap" data-es="Arquitectura técnica y roadmap de stack">Technical architecture & stack roadmap</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="MVP scoping & feature prioritization" data-es="Alcance de MVP y priorización de funciones">MVP scoping & feature prioritization</span></li>
                         </ul>
                     </div>
                 </div>
-                <button onclick="openBookingModal('2-Week Product Sprint (From $1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm">Book Sprint</button>
+                <button onclick="openBookingModal('2-Week Product Sprint (From $1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book Sprint" data-es="Agendar Sprint">Book Sprint</button>
             </div>
 
             <!-- Card 4: AI Agents & Upgrades -->
@@ -698,25 +765,25 @@
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-xl">🤖</div>
                     <div class="space-y-1">
-                        <h3 class="text-2xl font-bold text-gray-900">AI Agents & Upgrades</h3>
-                        <p class="text-xs text-gray-400 font-medium">Platform Intelligence</p>
+                        <h3 class="text-2xl font-bold text-gray-900" data-en="AI Agents & Upgrades" data-es="Agentes de IA y Mejoras">AI Agents & Upgrades</h3>
+                        <p class="text-xs text-gray-400 font-medium" data-en="Platform Intelligence" data-es="Inteligencia de Plataforma">Platform Intelligence</p>
                     </div>
-                    <p class="text-gray-500 text-xs leading-relaxed">
+                    <p class="text-gray-500 text-xs leading-relaxed" data-en="Custom AI chatbots, agentic e-commerce, and automated upgrades for existing platforms." data-es="Chatbots de IA personalizados, comercio electrónico agéntico y mejoras automatizadas para plataformas existentes.">
                         Custom AI chatbots, agentic e-commerce, and automated upgrades for existing platforms.
                     </p>
-                    <div class="text-2xl font-extrabold text-gray-900">Price on Request</div>
+                    <div class="text-2xl font-extrabold text-gray-900" data-en="Price on Request" data-es="Precio a Solicitud">Price on Request</div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
-                        <span class="text-xs font-semibold text-gray-900">Capabilities:</span>
+                        <span class="text-xs font-semibold text-gray-900" data-en="Capabilities:" data-es="Capacidades:">Capabilities:</span>
                         <ul class="text-xs text-gray-600 space-y-2.5">
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Custom AI Chatbots & Customer Assistants</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Agentic E-Commerce (Autonomous selling agents)</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Automated system workflows & API integrations</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Direct upgrades for existing live platforms</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Custom AI Chatbots & Customer Assistants" data-es="Chatbots de IA personalizados y asistentes">Custom AI Chatbots & Customer Assistants</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Agentic E-Commerce (Autonomous selling agents)" data-es="E-Commerce Agéntico (Agentes de venta autónomos)">Agentic E-Commerce (Autonomous selling agents)</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Automated system workflows & API integrations" data-es="Flujos de trabajo automatizados e integraciones API">Automated system workflows & API integrations</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Direct upgrades for existing live platforms" data-es="Actualizaciones directas para plataformas activas">Direct upgrades for existing live platforms</span></li>
                         </ul>
                     </div>
                 </div>
-                <button onclick="openBookingModal('AI Optimizations & Agents (Custom Quote)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm">Request Quote</button>
+                <button onclick="openBookingModal('AI Optimizations & Agents (Custom Quote)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm" data-en="Request Quote" data-es="Solicitar Cotización">Request Quote</button>
             </div>
 
             <!-- Card 5: Managed Tech Stack Support -->
@@ -724,25 +791,25 @@
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🛠</div>
                     <div class="space-y-1">
-                        <h3 class="text-2xl font-bold text-gray-900">Managed Tech Stack</h3>
-                        <p class="text-xs text-gray-400 font-medium">Monthly Fractional Tech Team</p>
+                        <h3 class="text-2xl font-bold text-gray-900" data-en="Managed Tech Stack" data-es="Stack Tecnológico Administrado">Managed Tech Stack</h3>
+                        <p class="text-xs text-gray-400 font-medium" data-en="Monthly Fractional Tech Team" data-es="Equipo Técnico Fraccional Mensual">Monthly Fractional Tech Team</p>
                     </div>
-                    <p class="text-gray-500 text-xs leading-relaxed">
+                    <p class="text-gray-500 text-xs leading-relaxed" data-en="Full operational management of your digital platform without an in-house team." data-es="Gestión operativa completa de tu plataforma digital sin necesidad de un equipo interno.">
                         Full operational management of your digital platform without an in-house team.
                     </p>
-                    <div class="text-2xl font-extrabold text-gray-900">Custom Retainer</div>
+                    <div class="text-2xl font-extrabold text-gray-900" data-en="Custom Retainer" data-es="Retainer Personalizado">Custom Retainer</div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
-                        <span class="text-xs font-semibold text-gray-900">Scope included:</span>
+                        <span class="text-xs font-semibold text-gray-900" data-en="Scope included:" data-es="Alcance incluido:">Scope included:</span>
                         <ul class="text-xs text-gray-600 space-y-2.5">
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> 24/7 Infrastructure & uptime monitoring</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Security patches, backups & domain health</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Continuous feature updates & optimizations</li>
-                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Direct engineering communication</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="24/7 Infrastructure & uptime monitoring" data-es="Monitoreo de infraestructura y actividad 24/7">24/7 Infrastructure & uptime monitoring</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Security patches, backups & domain health" data-es="Parches de seguridad, respaldos y salud de dominio">Security patches, backups & domain health</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Continuous feature updates & optimizations" data-es="Actualizaciones continuas y optimizaciones">Continuous feature updates & optimizations</span></li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> <span data-en="Direct engineering communication" data-es="Comunicación directa con ingeniería">Direct engineering communication</span></li>
                         </ul>
                     </div>
                 </div>
-                <button onclick="openBookingModal('Managed Tech Stack Support (Retainer)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm">Request Support</button>
+                <button onclick="openBookingModal('Managed Tech Stack Support (Retainer)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm" data-en="Request Support" data-es="Solicitar Soporte">Request Support</button>
             </div>
 
         </div>
@@ -752,10 +819,10 @@
     <section id="work" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-                <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Portfolio</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mt-1">Explore Work</h2>
+                <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Portfolio" data-es="Portafolio">Portfolio</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mt-1" data-en="Explore Work" data-es="Explorar Trabajo">Explore Work</h2>
             </div>
-            <p class="text-gray-500 text-sm max-w-xs">We build polished, production-ready applications that look great and scale fast.</p>
+            <p class="text-gray-500 text-sm max-w-xs" data-en="We build polished, production-ready applications that look great and scale fast." data-es="Construimos aplicaciones pulidas listas para producción que lucen increíble y escalan rápido.">We build polished, production-ready applications that look great and scale fast.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
@@ -767,8 +834,8 @@
                     </video>
                 </div>
                 <div class="p-4 space-y-2">
-                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">AI Fashion Visual System</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Generative visuals and virtual models for fashion storytelling.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors" data-en="AI Fashion Visual System" data-es="Sistema Visual de Moda con IA">AI Fashion Visual System</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed" data-en="Generative visuals and virtual models for fashion storytelling." data-es="Visuales generativos y modelos virtuales para narración de moda.">Generative visuals and virtual models for fashion storytelling.</p>
                 </div>
             </div>
 
@@ -779,8 +846,8 @@
                     </video>
                 </div>
                 <div class="p-4 space-y-2">
-                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">Luxury Ecommerce Experience</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Customer-centric ecommerce platform integrating digital storytelling.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors" data-en="Luxury Ecommerce Experience" data-es="Experiencia de Ecommerce de Lujo">Luxury Ecommerce Experience</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed" data-en="Customer-centric ecommerce platform integrating digital storytelling." data-es="Plataforma de ecommerce centrada en el cliente que integra narrativa digital.">Customer-centric ecommerce platform integrating digital storytelling.</p>
                 </div>
             </div>
 
@@ -790,49 +857,49 @@
     <!-- FREQUENTLY ASKED QUESTIONS SECTION -->
     <section id="faq" class="max-w-4xl mx-auto px-6 space-y-10 pt-10 page-section">
         <div class="text-center space-y-3">
-            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Questions? Answers.</span>
-            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
-            <p class="text-gray-500 text-sm max-w-md mx-auto">General FAQs regarding our process, tech stack, and delivery.</p>
+            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Questions? Answers." data-es="¿Preguntas? Respuestas.">Questions? Answers.</span>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight" data-en="Frequently Asked Questions" data-es="Preguntas Frecuentes">Frequently Asked Questions</h2>
+            <p class="text-gray-500 text-sm max-w-md mx-auto" data-en="General FAQs regarding our process, tech stack, and delivery." data-es="FAQs generales sobre nuestro proceso, stack tecnológico y entregas.">General FAQs regarding our process, tech stack, and delivery.</p>
         </div>
 
         <div class="space-y-4">
             
             <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-gray-900">What is CAAPSULA?</h3>
+                    <h3 class="text-lg font-bold text-gray-900" data-en="What is CAAPSULA?" data-es="¿Qué es CAAPSULA?">What is CAAPSULA?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
                 </div>
-                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed" data-en="CAAPSULA is a culture-driven technology venture and AI product studio that designs, builds, and launches digital platforms, e-commerce applications, and autonomous AI systems in weeks." data-es="CAAPSULA es una empresa de tecnología impulsada por la cultura y un estudio de productos de IA que diseña, construye y lanza plataformas digitales, aplicaciones de comercio electrónico y sistemas autónomos de IA en semanas.">
                     CAAPSULA is a culture-driven technology venture and AI product studio that designs, builds, and launches digital platforms, e-commerce applications, and autonomous AI systems in weeks.
                 </div>
             </div>
 
             <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-gray-900">What makes CAAPSULA different from other agencies?</h3>
+                    <h3 class="text-lg font-bold text-gray-900" data-en="What makes CAAPSULA different from other agencies?" data-es="¿Qué hace diferente a CAAPSULA de otras agencias?">What makes CAAPSULA different from other agencies?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
                 </div>
-                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed" data-en="We combine rapid AI platform engineering with high-end brand aesthetics. Every build includes design tokens in Figma, SEO, and generative AI positioning so tools like ChatGPT accurately understand your business." data-es="Combinamos ingeniería rápida de plataformas de IA con estética de marca de alta gama. Cada desarrollo incluye tokens de diseño en Figma, SEO y posicionamiento de IA generativa para que herramientas como ChatGPT entiendan con precisión tu negocio.">
                     We combine rapid AI platform engineering with high-end brand aesthetics. Every build includes design tokens in Figma, SEO, and generative AI positioning so tools like ChatGPT accurately understand your business.
                 </div>
             </div>
 
             <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-gray-900">How long does a typical build take?</h3>
+                    <h3 class="text-lg font-bold text-gray-900" data-en="How long does a typical build take?" data-es="¿Cuánto toma un desarrollo típico?">How long does a typical build take?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
                 </div>
-                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed" data-en="Our 2-Week Sprints ship in 14 days. Web presence builds launch in 2 to 4 weeks, and full e-commerce or native mobile apps take between 4 to 8 weeks depending on custom infrastructure requirements." data-es="Nuestros Sprints de 2 semanas se entregan en 14 días. Los sitios web se lanzan de 2 a 4 semanas, y las aplicaciones de comercio electrónico o móviles nativas toman entre 4 y 8 semanas según los requerimientos de infraestructura.">
                     Our 2-Week Sprints ship in 14 days. Web presence builds launch in 2 to 4 weeks, and full e-commerce or native mobile apps take between 4 to 8 weeks depending on custom infrastructure requirements.
                 </div>
             </div>
 
             <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-gray-900">How does the Managed Tech Stack retainer work?</h3>
+                    <h3 class="text-lg font-bold text-gray-900" data-en="How does the Managed Tech Stack retainer work?" data-es="¿Cómo funciona el retainer de Stack Tecnológico Administrado?">How does the Managed Tech Stack retainer work?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
                 </div>
-                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed" data-en="If you don't have an in-house engineering team, we take total ownership of your website, e-commerce, hosting, domain routing, security patches, and continuous optimizations under a single custom monthly retainer." data-es="Si no cuentas con un equipo interno de ingeniería, tomamos la propiedad total de tu sitio web, comercio electrónico, hosting, enrutamiento de dominios, parches de seguridad y optimizaciones continuas bajo un único retainer mensual personalizado.">
                     If you don't have an in-house engineering team, we take total ownership of your website, e-commerce, hosting, domain routing, security patches, and continuous optimizations under a single custom monthly retainer.
                 </div>
             </div>
@@ -853,24 +920,24 @@
 
         <div id="modal-form-view" class="space-y-6">
             <div class="space-y-2">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold tracking-wide uppercase">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold tracking-wide uppercase" data-en="Free Consultation" data-es="Consulta Gratuita">
                     Free Consultation
                 </div>
-                <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
+                <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight" data-en="Book your free 30-minute MVP strategy session below" data-es="Reserva tu sesión estratégica de MVP de 30 minutos gratis">
                     Book your free 30-minute MVP strategy session below
                 </h3>
-                <p class="text-gray-500 text-xs md:text-sm">Select a date, time slot, and tell us about your platform goals.</p>
+                <p class="text-gray-500 text-xs md:text-sm" data-en="Select a date, time slot, and tell us about your platform goals." data-es="Selecciona una fecha, horario y cuéntanos sobre los objetivos de tu plataforma.">Select a date, time slot, and tell us about your platform goals.</p>
             </div>
 
             <form id="booking-form" class="space-y-6" onsubmit="handleBookingSubmit(event)">
                 
                 <div class="grid md:grid-cols-2 gap-6 p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
                     <div class="space-y-2">
-                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Select Date</label>
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Select Date" data-es="Seleccionar Fecha">Select Date</label>
                         <input type="date" required id="booking-date" class="w-full px-4 py-3 rounded-xl creme-input text-sm text-gray-800 bg-white">
                     </div>
                     <div class="space-y-2">
-                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Select Time Slot (EST)</label>
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Select Time Slot (EST)" data-es="Seleccionar Horario (EST)">Select Time Slot (EST)</label>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <input type="radio" name="time_slot" id="slot1" value="10:00 AM" class="hidden time-slot" checked>
@@ -894,33 +961,33 @@
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="space-y-1.5">
-                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Your Name</label>
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
                         <input type="text" required placeholder="Alex Rivera" class="w-full px-4 py-3 rounded-xl creme-input text-sm focus:outline-none">
                     </div>
                     <div class="space-y-1.5">
-                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Email Address</label>
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
                         <input type="email" required id="booking-email" placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl creme-input text-sm focus:outline-none">
                     </div>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Primary Interest</label>
+                    <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Primary Interest" data-es="Interés Principal">Primary Interest</label>
                     <select id="booking-service-select" class="w-full px-4 py-3 rounded-xl creme-input text-sm text-gray-800 focus:outline-none bg-white">
-                        <option value="Online Presence ($1,500 USD)">Online Presence ($1,500 USD)</option>
-                        <option value="E-Commerce & Mobile Apps (From $2,500 USD)">E-Commerce & Mobile Apps (From $2,500 USD)</option>
-                        <option value="2-Week Product Sprint (From $1,500 USD)">2-Week Product Sprint (From $1,500 USD)</option>
-                        <option value="AI Optimizations & Agents (Custom Quote)">AI Optimizations & Agents (Custom Quote)</option>
-                        <option value="Managed Tech Stack Support (Retainer)">Managed Tech Stack Support (Retainer)</option>
-                        <option value="General Strategy Session">General Strategy Session</option>
+                        <option value="Online Presence ($1,500 USD)" data-en="Online Presence ($1,500 USD)" data-es="Presencia en Línea ($1,500 USD)">Online Presence ($1,500 USD)</option>
+                        <option value="E-Commerce & Mobile Apps (From $2,500 USD)" data-en="E-Commerce & Mobile Apps (From $2,500 USD)" data-es="E-Commerce y Apps (Desde $2,500 USD)">E-Commerce & Mobile Apps (From $2,500 USD)</option>
+                        <option value="2-Week Product Sprint (From $1,500 USD)" data-en="2-Week Product Sprint (From $1,500 USD)" data-es="Sprint de Producto de 2 Semanas (Desde $1,500 USD)">2-Week Product Sprint (From $1,500 USD)</option>
+                        <option value="AI Optimizations & Agents (Custom Quote)" data-en="AI Optimizations & Agents (Custom Quote)" data-es="Optimizaciones y Agentes de IA (Cotización Personalizada)">AI Optimizations & Agents (Custom Quote)</option>
+                        <option value="Managed Tech Stack Support (Retainer)" data-en="Managed Tech Stack Support (Retainer)" data-es="Soporte de Stack Tecnológico (Retainer)">Managed Tech Stack Support (Retainer)</option>
+                        <option value="General Strategy Session" data-en="General Strategy Session" data-es="Sesión de Estrategia General">General Strategy Session</option>
                     </select>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Project Notes (Optional)</label>
+                    <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Project Notes (Optional)" data-es="Notas del Proyecto (Opcional)">Project Notes (Optional)</label>
                     <textarea rows="2" placeholder="Briefly share your current project stage or questions..." class="w-full px-4 py-3 rounded-xl creme-input text-sm focus:outline-none"></textarea>
                 </div>
 
-                <button type="submit" class="w-full py-3.5 bg-gray-900 text-white font-semibold text-sm rounded-xl hover:bg-black transition-all duration-200 shadow-md">
+                <button type="submit" class="w-full py-3.5 bg-gray-900 text-white font-semibold text-sm rounded-xl hover:bg-black transition-all duration-200 shadow-md" data-en="Confirm Strategy Session" data-es="Confirmar Sesión Estratégica">
                     Confirm Strategy Session
                 </button>
             </form>
@@ -928,12 +995,12 @@
 
         <div id="modal-success-view" class="hidden text-center py-8 space-y-4">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
-            <h3 class="text-2xl font-bold text-gray-900">Your Strategy Session is Booked!</h3>
+            <h3 class="text-2xl font-bold text-gray-900" data-en="Your Strategy Session is Booked!" data-es="¡Tu Sesión Estratégica está Agendada!">Your Strategy Session is Booked!</h3>
             <p class="text-gray-600 text-sm max-w-md mx-auto leading-relaxed">
-                We've reserved your 30-minute MVP Strategy Session. A calendar invitation and confirmation email have been sent to <span id="confirmed-email" class="font-semibold text-gray-900"></span>.
+                <span data-en="We've reserved your 30-minute MVP Strategy Session. A calendar invitation and confirmation email have been sent to" data-es="Hemos reservado tu sesión de estrategia MVP de 30 minutos. Se ha enviado una invitación y correo de confirmación a">We've reserved your 30-minute MVP Strategy Session. A calendar invitation and confirmation email have been sent to</span> <span id="confirmed-email" class="font-semibold text-gray-900"></span>.
             </p>
             <div class="pt-4">
-                <button onclick="closeBookingModal()" class="px-8 py-3 bg-gray-900 text-white rounded-xl text-xs font-semibold hover:bg-black transition-all">
+                <button onclick="closeBookingModal()" class="px-8 py-3 bg-gray-900 text-white rounded-xl text-xs font-semibold hover:bg-black transition-all" data-en="Back to Website" data-es="Volver al Sitio Web">
                     Back to Website
                 </button>
             </div>
@@ -946,13 +1013,13 @@
 <footer class="relative z-10 max-w-7xl mx-auto px-6 pb-12 pt-6">
     <div class="bg-[#0d0d11] text-white rounded-3xl p-8 md:p-14 space-y-12 shadow-2xl">
         
-        <div class="max-w-xl space-y-4">
-            <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight">Subscribe to CAAPSULA</h3>
-            <p class="text-gray-400 text-xs md:text-sm">The partner for founders building culture-driven digital products and platforms.</p>
+        <div class="max-w-none space-y-4 text-left md:text-center">
+            <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight" data-en="Subscribe to CAAPSULA" data-es="Suscríbete a CAAPSULA">Subscribe to CAAPSULA</h3>
+            <p class="text-gray-400 text-xs md:text-sm" data-en="The partner for founders building culture-driven digital products and platforms." data-es="El socio para fundadores que construyen productos y plataformas digitales impulsados por la cultura.">The partner for founders building culture-driven digital products and platforms.</p>
             
-            <form onsubmit="event.preventDefault(); alert('Subscribed to CAAPSULA!');" class="flex items-center bg-white rounded-full p-1.5 max-w-md">
-                <input type="email" required placeholder="Enter email..." class="w-full px-5 py-2 text-xs text-gray-900 bg-transparent focus:outline-none placeholder-gray-400">
-                <button type="submit" class="bg-black text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors shrink-0">
+            <form onsubmit="event.preventDefault(); alert(currentLang === 'ES' ? '¡Suscrito a CAAPSULA!' : 'Subscribed to CAAPSULA!');" class="flex items-center bg-white rounded-full p-1.5 w-full">
+                <input type="email" required placeholder="Enter email..." id="footer-input" class="w-full px-5 py-2 text-xs text-gray-900 bg-transparent focus:outline-none placeholder-gray-400">
+                <button type="submit" class="bg-black text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors shrink-0" data-en="Sign Up" data-es="Registrarse">
                     Sign Up
                 </button>
             </form>
@@ -960,27 +1027,28 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-xs text-gray-400 font-medium pt-4 border-t border-white/10">
             <div class="space-y-3 flex flex-col">
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#work" class="hover:text-white transition-colors">Work</a>
-                <a href="#" class="hover:text-white transition-colors">Blog</a>
+                <a href="#about" class="hover:text-white transition-colors" data-en="About" data-es="Acerca de">About</a>
+                <a href="#work" class="hover:text-white transition-colors" data-en="Work" data-es="Trabajo">Work</a>
+                <a href="#" class="hover:text-white transition-colors" data-en="Blog" data-es="Blog">Blog</a>
             </div>
             <div class="space-y-3 flex flex-col">
-                <a href="#services" class="hover:text-white transition-colors">Pricing</a>
-                <a href="#work" class="hover:text-white transition-colors">Testimonials</a>
-                <a href="#faq" class="hover:text-white transition-colors">FAQs</a>
+                <a href="#services" class="hover:text-white transition-colors" data-en="Pricing" data-es="Precios">Pricing</a>
+                <a href="#work" class="hover:text-white transition-colors" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+                <a href="#faq" class="hover:text-white transition-colors" data-en="FAQs" data-es="Preguntas Frecuentes">FAQs</a>
             </div>
             <div class="space-y-3 flex flex-col">
-                <button onclick="openBookingModal()" class="hover:text-white transition-colors text-left">Book a Call</button>
-                <a href="mailto:hola@caapsula.com" class="hover:text-white transition-colors">Contact</a>
+                <button onclick="openBookingModal()" class="hover:text-white transition-colors text-left" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
+                <a href="mailto:hola@caapsula.com" class="hover:text-white transition-colors" data-en="Contact" data-es="Contacto">Contact</a>
             </div>
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 pt-8 border-t border-white/10 gap-4">
-            <div>&copy; CAAPSULA Corp. All rights reserved.</div>
+            <div data-en="&copy; CAAPSULA Corp. All rights reserved." data-es="&copy; CAAPSULA Corp. Todos los derechos reservados.">&copy; CAAPSULA Corp. All rights reserved.</div>
             <div class="flex gap-6 text-gray-400">
-                <a href="#" class="hover:text-white transition-colors">X / Twitter</a>
+                <a href="#" class="hover:text-white transition-colors">Facebook</a>
+                <a href="#" class="hover:text-white transition-colors">X</a>
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
                 <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
-                <a href="#" class="hover:text-white transition-colors">GitHub</a>
             </div>
         </div>
 
@@ -1037,6 +1105,80 @@
         }
     });
 
+    /* --- LANGUAGE DROPDOWN CONTROLS & LIVE TRANSLATION ENGINE --- */
+    let currentLang = 'EN';
+    const usFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>`;
+    const spainFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg>`;
+
+    function toggleLangDropdown() {
+        const dropdown = document.getElementById('lang-dropdown');
+        const arrow = document.getElementById('lang-arrow');
+        dropdown.classList.toggle('hidden');
+        arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    function toggleMobileLangDropdown() {
+        const dropdown = document.getElementById('mobile-lang-dropdown');
+        const arrow = document.getElementById('mobile-lang-arrow');
+        dropdown.classList.toggle('hidden');
+        arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    function switchLanguage(lang) {
+        currentLang = lang;
+        const langBtn = document.getElementById('lang-btn');
+        const mobileBtnText = document.getElementById('mobile-lang-text');
+        const mobileFlagIcon = document.getElementById('mobile-flag-icon');
+        const checkEn = document.getElementById('check-en');
+        const checkEs = document.getElementById('check-es');
+        const footerInput = document.getElementById('footer-input');
+
+        if (lang === 'ES') {
+            langBtn.innerHTML = `${spainFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">ES</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
+            mobileBtnText.textContent = "Español (ES)";
+            mobileFlagIcon.outerHTML = `<svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg>`;
+            checkEn.classList.add('hidden');
+            checkEs.classList.remove('hidden');
+            if(footerInput) footerInput.placeholder = "Ingresa tu correo...";
+        } else {
+            langBtn.innerHTML = `${usFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">EN</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
+            mobileBtnText.textContent = "English (US)";
+            mobileFlagIcon.outerHTML = `<svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>`;
+            checkEs.classList.add('hidden');
+            checkEn.classList.remove('hidden');
+            if(footerInput) footerInput.placeholder = "Enter email...";
+        }
+
+        // Apply text translation across all elements with data-en / data-es attributes
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const translation = el.getAttribute(`data-${lang.toLowerCase()}`);
+            if (translation) {
+                el.textContent = translation;
+            }
+        });
+
+        // Close dropdowns after selection
+        document.getElementById('lang-dropdown').classList.add('hidden');
+        document.getElementById('mobile-lang-dropdown').classList.add('hidden');
+        
+        // Reset dropdown arrows
+        const desktopArrow = document.getElementById('lang-arrow');
+        if(desktopArrow) desktopArrow.style.transform = 'rotate(0deg)';
+        const mobileArrow = document.getElementById('mobile-lang-arrow');
+        if(mobileArrow) mobileArrow.style.transform = 'rotate(0deg)';
+    }
+
+    // Close dropdowns when clicking outside
+    window.addEventListener('click', (e) => {
+        const desktopLang = document.getElementById('lang-btn');
+        const desktopDropdown = document.getElementById('lang-dropdown');
+        if (desktopLang && desktopDropdown && !desktopLang.contains(e.target) && !desktopDropdown.contains(e.target)) {
+            desktopDropdown.classList.add('hidden');
+            const arrow = document.getElementById('lang-arrow');
+            if(arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+    });
+
     const languages = [
         { status: "SYS_STATUS:", node: "NETWORK_NODE:", time: "SYS_TIME:" },
         { status: "ESTADO_SYS:", node: "NODO_RED:", time: "TIEMPO_SYS:" },
@@ -1083,15 +1225,15 @@
     const timeEl = document.getElementById('live-timestamp');
 
     setInterval(() => {
-        const currentLang = languages[currentLangIndex];
+        const currentLangObj = languages[currentLangIndex];
         const statusPool = statusStringsByLanguage[currentLangIndex];
 
-        labelStatusEl.textContent = currentLang.status;
-        labelNodeEl.textContent = currentLang.node;
-        labelTimeEl.textContent = currentLang.time;
+        if (labelStatusEl) labelStatusEl.textContent = currentLangObj.status;
+        if (labelNodeEl) labelNodeEl.textContent = currentLangObj.node;
+        if (labelTimeEl) labelTimeEl.textContent = currentLangObj.time;
 
-        statusEl.textContent = statusPool[currentStatusIndex];
-        nodeEl.textContent = `10.98.${Math.floor(Math.random() * 89 + 10)}.${Math.floor(Math.random() * 250)}`;
+        if (statusEl) statusEl.textContent = statusPool[currentStatusIndex];
+        if (nodeEl) nodeEl.textContent = `10.98.${Math.floor(Math.random() * 89 + 10)}.${Math.floor(Math.random() * 250)}`;
 
         currentStatusIndex++;
 
@@ -1103,7 +1245,9 @@
 
     function tickClock() {
         const now = new Date();
-        timeEl.textContent = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0').slice(0, 2);
+        if (timeEl) {
+            timeEl.textContent = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0').slice(0, 2);
+        }
         requestAnimationFrame(tickClock);
     }
     requestAnimationFrame(tickClock);
