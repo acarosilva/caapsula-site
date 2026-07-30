@@ -129,6 +129,19 @@
         -webkit-font-smoothing: antialiased;
     }
 
+    /* --- APPLE-STYLE FADE UP ANIMATION --- */
+    .fade-up-element {
+        opacity: 0;
+        transform: translateY(40px);
+        /* The cubic-bezier matches Apple's signature smooth spring-ease-out */
+        transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+    .fade-up-element.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .creme-card {
         background: #ffffff;
         border: 1px solid rgba(0, 0, 0, 0.06);
@@ -316,7 +329,7 @@
 <!-- 2. MAIN WEBSITE CONTENT -->
 
 <!-- Dynamic Header Bar -->
-<header id="navbar-header" class="fixed top-0 left-0 right-0 z-40 px-6 py-6">
+<header id="navbar-header" class="fixed top-0 left-0 right-0 z-40 px-6 py-6 fade-up-element">
     <div id="nav-inner-bar" class="max-w-7xl mx-auto flex items-center justify-between px-5 py-3 rounded-full bg-black/90 backdrop-blur-xl border border-white/10 text-white shadow-2xl">
         
         <!-- Logo Wrapper (Left) -->
@@ -442,19 +455,19 @@
         <div class="grid md:grid-cols-12 gap-12 items-center">
             
             <div class="md:col-span-7 space-y-8">
-                <div class="inline-flex items-center px-3.5 py-1.5 rounded-full creme-card text-xs text-gray-600 tracking-wide uppercase font-semibold" data-en="Culture-Driven Technology Studio" data-es="Estudio de Tecnología Impulsado por la Cultura">
+                <div class="fade-up-element inline-flex items-center px-3.5 py-1.5 rounded-full creme-card text-xs text-gray-600 tracking-wide uppercase font-semibold" data-en="Culture-Driven Technology Studio" data-es="Estudio de Tecnología Impulsado por la Cultura">
                     Culture-Driven Technology Studio
                 </div>
                 
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.08]" data-en="We'll build your idea into a ready to launch platform in 2-weeks" data-es="Convertimos tu idea en una plataforma lista para lanzar en 2 semanas">
+                <h1 class="fade-up-element text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.08]" data-en="We'll build your idea into a ready to launch platform in 2-weeks" data-es="Convertimos tu idea en una plataforma lista para lanzar en 2 semanas">
                     We'll build your idea into a ready to launch platform in 2-weeks
                 </h1>
                 
-                <p class="text-lg text-gray-500 font-normal max-w-xl leading-relaxed" data-en="The culture-first product studio — trusted by startups and founders to design, build, and launch high-impact digital platforms that scale." data-es="El estudio de producto enfocado en cultura, confiado por startups y fundadores para diseñar, construir y lanzar plataformas digitales de alto impacto que escalan.">
+                <p class="fade-up-element text-lg text-gray-500 font-normal max-w-xl leading-relaxed" data-en="The culture-first product studio — trusted by startups and founders to design, build, and launch high-impact digital platforms that scale." data-es="El estudio de producto enfocado en cultura, confiado por startups y fundadores para diseñar, construir y lanzar plataformas digitales de alto impacto que escalan.">
                     The culture-first product studio — trusted by startups and founders to design, build, and launch high-impact digital platforms that scale.
                 </p>
 
-                <div class="flex flex-wrap gap-4 pt-2">
+                <div class="fade-up-element flex flex-wrap gap-4 pt-2">
                     <button onclick="openBookingModal()" class="bg-gray-900 text-white font-medium text-sm px-8 py-4 rounded-full hover:bg-black transition-all duration-200 shadow-md flex items-center gap-2">
                         <span>›</span> <span data-en="Book a Call" data-es="Agendar Llamada">Book a Call</span>
                     </button>
@@ -464,8 +477,8 @@
                 </div>
             </div>
 
-            <!-- Featured Video Capsule Card con Preload="auto" para carga inmediata -->
-            <div class="md:col-span-5 relative perspective-1000">
+            <!-- Featured Video Capsule Card -->
+            <div class="md:col-span-5 relative perspective-1000 fade-up-element">
                 <div id="hero-tilt-card" class="creme-card rounded-3xl p-4 relative overflow-hidden group cursor-pointer">
                     <div class="relative h-96 w-full rounded-2xl overflow-hidden bg-black">
                         <video autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover">
@@ -485,7 +498,7 @@
 
     <!-- ABOUT SECTION -->
     <section id="about" class="max-w-7xl mx-auto px-6 page-section">
-        <div class="creme-card rounded-3xl p-8 md:p-16 relative overflow-hidden bg-white">
+        <div class="creme-card rounded-3xl p-8 md:p-16 relative overflow-hidden bg-white fade-up-element">
             <div class="max-w-3xl space-y-6">
                 <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="About CAAPSULA" data-es="Acerca de CAAPSULA">About CAAPSULA</span>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-snug" data-en="Move faster with AI-powered platform architecture" data-es="Avanza más rápido con arquitectura de plataforma impulsada por IA">
@@ -502,21 +515,21 @@
     <section class="max-w-7xl mx-auto px-6 space-y-16">
         
         <div class="grid md:grid-cols-3 gap-6">
-            <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
+            <div class="fade-up-element creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Products Built" data-es="Productos Creados">Products Built</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
                     50+
                 </div>
             </div>
 
-            <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
+            <div class="fade-up-element creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Client Funding" data-es="Financiamiento de Clientes">Client Funding</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
                     <span data-en="$15M+" data-es="$15M+">$15M+</span>
                 </div>
             </div>
 
-            <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
+            <div class="fade-up-element creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Total VC investments in our clients" data-es="Inversiones VC totales en nuestros clientes">Total VC investments in our clients</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
                     10+
@@ -524,7 +537,7 @@
             </div>
         </div>
 
-        <div class="space-y-8 pt-4">
+        <div class="space-y-8 pt-4 fade-up-element">
             <p class="text-center text-xs font-semibold text-gray-400 tracking-wide uppercase" data-en="Trusted by industry leaders" data-es="Con la confianza de líderes de la industria">
                 Trusted by industry leaders
             </p>
@@ -561,7 +574,7 @@
 
     <!-- SERVICES SECTION -->
     <section id="services" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
-        <div class="text-center max-w-2xl mx-auto space-y-3">
+        <div class="fade-up-element text-center max-w-2xl mx-auto space-y-3">
             <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Flexible Pricing" data-es="Precios Flexibles">Flexible Pricing</span>
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
                 <div data-en="Our Pricing." data-es="Nuestros Precios.">Our Pricing.</div>
@@ -572,7 +585,7 @@
 
         <div class="grid md:grid-cols-2 lg:flex lg:flex-wrap lg:justify-center gap-8 items-stretch">
             
-            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+            <div class="fade-up-element creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🌐</div>
                     <div class="space-y-1">
@@ -600,7 +613,7 @@
                 <button onclick="openBookingModal('Online Presence ($1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
             </div>
 
-            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+            <div class="fade-up-element creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">⚡</div>
                     <div class="space-y-1">
@@ -628,7 +641,7 @@
                 <button onclick="openBookingModal('E-Commerce & Mobile Apps (From $2,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
             </div>
 
-            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+            <div class="fade-up-element creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🚀</div>
                     <div class="space-y-1">
@@ -655,7 +668,7 @@
                 <button onclick="openBookingModal('2-Week Product Sprint (From $1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book Sprint" data-es="Agendar Sprint">Book Sprint</button>
             </div>
 
-            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+            <div class="fade-up-element creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-xl">🤖</div>
                     <div class="space-y-1">
@@ -680,7 +693,7 @@
                 <button onclick="openBookingModal('AI Optimizations & Agents (Custom Quote)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm" data-en="Request Quote" data-es="Solicitar Cotización">Request Quote</button>
             </div>
 
-            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white border-2 border-yellow-400/40 lg:w-[calc(33.333%-1.5rem)]">
+            <div class="fade-up-element creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white border-2 border-yellow-400/40 lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🛠</div>
                     <div class="space-y-1">
@@ -710,7 +723,7 @@
 
     <!-- SELECTED WORK SECTION -->
     <section id="work" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="fade-up-element flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
                 <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Portfolio" data-es="Portafolio">Portfolio</span>
                 <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mt-1" data-en="Explore Work" data-es="Explorar Trabajo">Explore Work</h2>
@@ -719,7 +732,7 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
+            <div class="fade-up-element tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6 bg-gray-100">
                     <!-- Lazy loaded video -->
                     <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -732,7 +745,7 @@
                 </div>
             </div>
 
-            <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
+            <div class="fade-up-element tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6 bg-gray-100">
                     <!-- Lazy loaded video -->
                     <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -749,14 +762,14 @@
 
     <!-- FREQUENTLY ASKED QUESTIONS SECTION -->
     <section id="faq" class="max-w-4xl mx-auto px-6 space-y-10 pt-10 page-section">
-        <div class="text-center space-y-3">
+        <div class="fade-up-element text-center space-y-3">
             <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Questions? Answers." data-es="¿Preguntas? Respuestas.">Questions? Answers.</span>
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight" data-en="Frequently Asked Questions" data-es="Preguntas Frecuentes">Frequently Asked Questions</h2>
             <p class="text-gray-500 text-sm max-w-md mx-auto" data-en="General FAQs regarding our process, tech stack, and delivery." data-es="FAQs generales sobre nuestro proceso, stack tecnológico y entregas.">General FAQs regarding our process, tech stack, and delivery.</p>
         </div>
 
         <div class="space-y-4">
-            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+            <div class="fade-up-element faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-900" data-en="What is CAAPSULA?" data-es="¿Qué es CAAPSULA?">What is CAAPSULA?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
@@ -766,7 +779,7 @@
                 </div>
             </div>
 
-            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+            <div class="fade-up-element faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-900" data-en="What makes CAAPSULA different from other agencies?" data-es="¿Qué hace diferente a CAAPSULA de otras agencias?">What makes CAAPSULA different from other agencies?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
@@ -776,7 +789,7 @@
                 </div>
             </div>
 
-            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+            <div class="fade-up-element faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-900" data-en="How long does a typical build take?" data-es="¿Cuánto toma un desarrollo típico?">How long does a typical build take?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
@@ -786,7 +799,7 @@
                 </div>
             </div>
 
-            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+            <div class="fade-up-element faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-900" data-en="How does the Managed Tech Stack retainer work?" data-es="¿Cómo funciona el retainer de Stack Tecnológico Administrado?">How does the Managed Tech Stack retainer work?</h3>
                     <span class="faq-icon text-xl text-gray-400 font-light">+</span>
@@ -901,10 +914,10 @@
 
 <!-- CREME DIGITAL SIGNATURE DARK FOOTER -->
 <footer class="relative z-10 max-w-7xl mx-auto px-6 pb-12 pt-6">
-    <div class="bg-[#0d0d11] text-white rounded-3xl p-8 md:p-14 space-y-12 shadow-2xl">
+    <div class="fade-up-element bg-[#0d0d11] text-white rounded-3xl p-8 md:p-14 space-y-12 shadow-2xl">
         <div class="max-w-none space-y-4 text-left md:text-center">
             <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight" data-en="Subscribe to CAAPSULA" data-es="Suscríbete a CAAPSULA">Subscribe to CAAPSULA</h3>
-            <p class="text-gray-400 text-xs md:text-sm" data-en="The partner for founders building culture-driven digital products and platforms." data-es="El socio para fundadores que construyen productos y platforms digitales impulsados por la cultura.">The partner for founders building culture-driven digital products and platforms.</p>
+            <p class="text-gray-400 text-xs md:text-sm" data-en="The partner for founders building culture-driven digital products and platforms." data-es="El socio para fundadores que construyen productos y plataformas digitales impulsados por la cultura.">The partner for founders building culture-driven digital products and platforms.</p>
             
             <form onsubmit="event.preventDefault(); alert(currentLang === 'ES' ? '¡Suscrito a CAAPSULA!' : 'Subscribed to CAAPSULA!');" class="flex items-center bg-white rounded-full p-1.5 w-full">
                 <input type="email" required placeholder="Enter email..." id="footer-input" class="w-full px-5 py-2 text-xs text-gray-900 bg-transparent focus:outline-none placeholder-gray-400">
@@ -945,6 +958,28 @@
 
 <!-- 3. INTERACTIONS & LOADER TRACKING SCRIPTS -->
 <script>
+    /* --- FADE UP ANIMATION OBSERVER --- */
+    function initScrollAnimations() {
+        const fadeElements = document.querySelectorAll('.fade-up-element');
+        const fadeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Slight stagger effect for elements entering at the same time
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, index * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px 0px -30px 0px"
+        });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+    }
+
     /* --- INFINITE LOADER ENGINE WITH 20-CLICK BYPASS --- */
     const wrapper = document.getElementById('interactive-wrapper');
     const stealthLoader = document.getElementById('stealth-loader-screen');
@@ -987,6 +1022,9 @@
             stealthLoader.style.opacity = '0';
             stealthLoader.style.visibility = 'hidden';
             document.body.style.overflow = '';
+            
+            // Initiate the beautiful fade-up animations after loader is bypassed
+            initScrollAnimations();
         }
     });
 
@@ -1071,7 +1109,7 @@
             }
         });
 
-        // Close dropdowns
+        // Close dropdowns after selection
         document.getElementById('lang-dropdown').classList.add('hidden');
         const mobileDropdown = document.getElementById('mobile-lang-dropdown');
         if (mobileDropdown) mobileDropdown.classList.add('hidden');
