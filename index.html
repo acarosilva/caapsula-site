@@ -7,12 +7,13 @@
 <meta name="format-detection" content="telephone=no">
 <title id="page-title">CAAPSULA — Culture-driven Technologies</title>
 
-<!-- DNS Preconnects para optimizar la carga de red -->
+<!-- OPTIMIZACIÓN DE RED: Preconexiones y Preload del video principal -->
+<link rel="preload" as="video" href="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4">
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="preconnect" href="https://cdn.coverr.co">
 
-<!-- Tailwind CSS CDN for Creme Digital Aesthetics -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind CSS CDN con DEFER para no bloquear la pantalla negra de carga inicial -->
+<script src="https://cdn.tailwindcss.com" defer></script>
 <script>
     tailwind.config = {
       theme: {
@@ -447,10 +448,10 @@
                     Book a Call
                 </button>
                 
-                <!-- Desktop Language Dropdown Component with Pre-optimized SVG Sprites -->
+                <!-- Desktop Language Dropdown Component with SVG Flags (Mexico / USA) -->
                 <div class="relative">
                     <button onclick="toggleLangDropdown()" id="lang-btn" class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-full border border-white/10 hover:bg-white/20 transition-all focus:outline-none">
-                        <svg class="w-4 h-3 rounded-sm object-cover shadow-sm"><use href="#flag-us"></use></svg>
+                        <svg class="w-4 h-3 rounded-sm object-cover shadow-sm" id="desktop-flag"><use href="#flag-us"></use></svg>
                         <span class="text-[11px] font-bold uppercase tracking-wider text-white" id="current-lang-label">EN</span>
                         <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>
                     </button>
@@ -458,14 +459,14 @@
                     <div id="lang-dropdown" class="absolute right-0 mt-2 w-36 bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                         <button onclick="switchLanguage('EN')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-us"></use></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><use href="#flag-us"></use></svg> 
                                 English
                             </span>
                             <span class="text-[10px] text-amber-400" id="check-en">✓</span>
                         </button>
                         <button onclick="switchLanguage('ES')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-mx"></use></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><use href="#flag-mx"></use></svg> 
                                 Español
                             </span>
                             <span class="text-[10px] text-amber-400 hidden" id="check-es">✓</span>
@@ -513,7 +514,7 @@
         <div class="relative">
             <button onclick="toggleMobileLangDropdown()" id="mobile-lang-btn" class="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 transition-all">
                 <div class="flex items-center gap-3">
-                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm"><use href="#flag-us"></use></svg>
+                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 640 480"><use href="#flag-us"></use></svg>
                     <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">English (US)</span>
                 </div>
                 <span class="text-sm text-gray-400 font-bold transition-transform duration-200" id="mobile-lang-arrow">▼</span>
@@ -522,13 +523,13 @@
             <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                 <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-us"></use></svg> 
+                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><use href="#flag-us"></use></svg> 
                         English (US)
                     </span>
                 </button>
                 <button onclick="switchLanguage('ES');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-mx"></use></svg> 
+                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><use href="#flag-mx"></use></svg> 
                         Español (MX)
                     </span>
                 </button>
@@ -645,7 +646,6 @@
                 <div class="animate-marquee items-center gap-16 text-gray-400 font-bold text-xl uppercase tracking-widest">
                     
                     <!-- First Set of Logos -->
-                    <!-- Carga diferida en logos usando loading="lazy" y decoding="async" -->
                     <div class="flex items-center gap-16 shrink-0 h-10">
                         <img src="adidas-13.png" alt="Adidas" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                         <img src="bbva-2.png" alt="BBVA" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
@@ -846,9 +846,8 @@
             
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
-                    <!-- Optimización en videos secundarios (preload=none) -->
-                    <video autoplay muted loop playsinline preload="none" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <source src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4">
+                    <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <source data-src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="p-4 space-y-2">
@@ -859,9 +858,8 @@
 
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
-                    <!-- Optimización en videos secundarios (preload=none) -->
-                    <video autoplay muted loop playsinline preload="none" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <source src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4">
+                    <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <source data-src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="p-4 space-y-2">
@@ -1124,6 +1122,31 @@
         }
     });
 
+    /* --- LAZY LOAD VIDEOS --- */
+    document.addEventListener("DOMContentLoaded", function() {
+        let lazyVideos = [].slice.call(document.querySelectorAll("video.lazy-video"));
+        if ("IntersectionObserver" in window) {
+            let lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(video) {
+                    if (video.isIntersecting) {
+                        for (let source in video.target.children) {
+                            let videoSource = video.target.children[source];
+                            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+                                videoSource.src = videoSource.dataset.src;
+                            }
+                        }
+                        video.target.load();
+                        video.target.play().catch(e => console.log("Autoplay prevented", e));
+                        lazyVideoObserver.unobserve(video.target);
+                    }
+                });
+            });
+            lazyVideos.forEach(function(lazyVideo) {
+                lazyVideoObserver.observe(lazyVideo);
+            });
+        }
+    });
+
     /* --- LANGUAGE DROPDOWN CONTROLS & LIVE TRANSLATION ENGINE --- */
     let currentLang = 'EN';
     const usFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><use href="#flag-us"></use></svg>`;
@@ -1220,7 +1243,7 @@
         { status: "حالة_النظام:", node: "عقدة_الشبكة:", time: "وقت_النظام:" },
         { status: "系统状态:", node: "网络节点:", time: "系统时间:" },
         { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },
-        { status: "システム_상태:", node: "네트워크_노드:", time: "システム_시간:" },
+        { status: "システム_상태:", node: "네트워크_노드:", time: "시스템_시간:" },
         { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },
         { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },
         { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },
@@ -1241,7 +1264,7 @@
         ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"],
         ["ΑΡΧΙΚΟΠΟΙΗΣΗ_ΣΥΝΔΕΣΗΣ", "ΒΕΛΤΙΣΤΟΠΟΙΗΣΗ_ΣΥΝΑΛΛΑΓΩΝ", "ΑΣΦΑΛΗΣ_ΚΥΚΛΟΣ_PING", "ΚΑΘΟΡΙΣΜΟΣ_ΔΕΙΚΤΩΝ"],
         ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"],
-        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_لूप", "मीट्रिक_स्थापना"],
+        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_लूप", "मीट्रिक_स्थापना"],
         ["ИНИЦИАЛИЗАЦИЯ_СВЯЗИ", "ОПТИМИЗАЦИЯ_ТРАНЗАКЦИЙ", "ЗАЩИЩЕННЫЙ_ПИНГ_ЦИКЛ", "УСТАНОВКА_МЕТРИК"],
         ["กำลังเริ่มการเชื่อมต่อ", "กำลังปรับปรุงธุรกรรม", "ระบบตรวจสอบเครือข่ายปลอดภัย", "กำลังตั้งค่าพารามิเตอร์"]
     ];
@@ -1344,7 +1367,13 @@
 
     function openBookingModal(defaultService = '') {
         if (defaultService && bookingServiceSelect) {
-            bookingServiceSelect.value = defaultService;
+            // Find the option element based on current language translation
+            const option = Array.from(bookingServiceSelect.options).find(opt => 
+                opt.getAttribute('data-en').includes(defaultService.split(' ')[0]) // fuzzy match on primary interest
+            );
+            if (option) {
+                bookingServiceSelect.value = option.value;
+            }
         }
         formView.classList.remove('hidden');
         successView.classList.add('hidden');
