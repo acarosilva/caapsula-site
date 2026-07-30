@@ -5,9 +5,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
-<!-- FINALIZED BRAND IDENTITY PROFILE -->
-<title>Caapsula — Culture-driven Technologies</title>
-<link rel="stylesheet" href="style.css">
+<title>CAAPSULA — Culture-driven Technologies</title>
+
+<!-- Tailwind CSS CDN for Creme Digital Aesthetics -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+            },
+            cadmium: {
+              400: '#ffea3d',
+              500: '#FFDE00',
+              600: '#e6c800',
+            }
+          }
+        }
+      }
+    }
+</script>
+
 <style>
     /* --- INFINITE LOADER OVERLAY BLOCK --- */
     #stealth-loader-screen {
@@ -27,6 +49,7 @@
         z-index: 999999;
         overflow: hidden;
         perspective: 1200px;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
         
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -111,14 +134,206 @@
         0%, 65% { transform: rotate(0deg); }
         90%, 100% { transform: rotate(360deg); }
     }
+
+    /* --- CAAPSULA WEBSITE STYLES --- */
+    body {
+        background-color: #f9f9fb;
+        color: #111116;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .creme-card {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.03);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    .creme-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.07);
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-modal {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+    }
+
+    .creme-input {
+        background: rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        color: #111116;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .creme-input:focus {
+        outline: none;
+        border-color: #e6c800;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(255, 222, 0, 0.2);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* --- FIXED DESKTOP NAVBAR SPLIT ON SCROLL --- */
+    #navbar-header {
+        transition: padding 0.3s ease;
+    }
+
+    #nav-inner-bar {
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+    }
+
+    /* Scrolled State for ALL screen sizes */
+    body.nav-scrolled #nav-inner-bar {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    body.nav-scrolled .logo-wrapper span {
+        color: #111116 !important;
+    }
+
+    /* Desktop Specific Scrolled Pill Settings */
+    @media (min-width: 768px) {
+        body.nav-scrolled #center-nav-pill {
+            background-color: rgba(245, 243, 230, 0.85) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+            padding: 5px 6px 5px 20px !important;
+            border-radius: 9999px !important;
+        }
+
+        body.nav-scrolled #center-nav-pill a {
+            color: #6b7280 !important;
+        }
+
+        body.nav-scrolled #center-nav-pill a:hover,
+        body.nav-scrolled #center-nav-pill a.active-link {
+            color: #111116 !important;
+            font-weight: 700 !important;
+        }
+
+        body.nav-scrolled #center-nav-pill .cta-btn {
+            background-color: #111116 !important;
+            color: #ffffff !important;
+        }
+    }
+
+    /* Mobile Specific Scrolled Burger Button Settings */
+    @media (max-width: 767px) {
+        body.nav-scrolled .mobile-burger-btn {
+            background-color: #111116 !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+    }
+
+    /* Modal Animation Classes */
+    #booking-modal {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #booking-modal.hidden-modal {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    #booking-modal.visible-modal {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    #booking-modal .modal-content {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #booking-modal.hidden-modal .modal-content {
+        transform: scale(0.95) translateY(20px);
+    }
+    #booking-modal.visible-modal .modal-content {
+        transform: scale(1) translateY(0);
+    }
+
+    /* FAQ Accordion Transitions */
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+        opacity: 0;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 200px;
+        opacity: 1;
+    }
+    .faq-icon {
+        transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-icon {
+        transform: rotate(45deg);
+    }
+
+    /* Time Slot Radio styling */
+    .time-slot:checked + label {
+        background-color: #111116;
+        color: #ffffff;
+        border-color: #111116;
+    }
+
+    /* Mobile Menu Drawer Animation */
+    #mobile-menu {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #mobile-menu.menu-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    #mobile-menu.menu-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* LOGO CAROUSEL INFINITE MARQUEE ANIMATION */
+    @keyframes marquee {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+        display: flex;
+        width: 200%;
+        animation: marquee 25s linear infinite;
+    }
+    .animate-marquee:hover {
+        animation-play-state: paused;
+    }
+
+    /* MASK FOR CAROUSEL FADE EDGES */
+    .carousel-mask {
+        mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
 </style>
 </head>
 
-<body style="overflow: hidden !important;">
+<body class="relative min-h-screen selection:bg-[#FFDE00] selection:text-black">
 
-<!-- INFINITE GATE OVERLAY -->
+<!-- 1. INFINITE GATE OVERLAY SCREEN WITH 20-CLICK BYPASS -->
 <div id="stealth-loader-screen">
-    <div class="logo-container" id="interactive-wrapper">
+    <div class="logo-container" id="interactive-wrapper" title="Click 20 times to bypass loader">
         <svg class="capsule-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <clipPath id="liquid-clip">
@@ -167,105 +382,623 @@
     </div>
 </div>
 
-<!-- --- PERSISTENT ORIGINAL HIDDEN WEBSITE CONTENT --- -->
-<nav>
-<div class="logo">CAAPSULA</div>
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#work">Work</a>
-<a href="#practices">Practices</a>
-<a href="#contact">Contact</a>
-</div>
-</nav>
+<!-- 2. MAIN WEBSITE CONTENT -->
 
-<section class="hero">
-<video autoplay muted loop playsinline class="hero-video">
-<source src="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4" type="video/mp4">
-</video>
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<h1>Creative technology for immersive worlds</h1>
-<p>AI media · immersive environments · fashion technology · digital platforms</p>
-<a class="cta" href="#work">Explore Work</a>
-</div>
-</section>
+<!-- Light Ambient Canvas Background -->
+<canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-<section id="about" class="section">
-<div class="text-block">
-<h2>About</h2>
-<p>Caapsula is a creative technology studio exploring the intersection of artificial intelligence, immersive media, fashion innovation, and digital platforms.</p>
-<p>The studio develops AI media systems, experiential environments, digital commerce platforms, and experimental technologies for culture, fashion, and entertainment.</p>
-</div>
-</section>
+<!-- Subtle Yellow Cadmium Ambient Glows -->
+<div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#FFDE00]/15 rounded-full blur-[180px] pointer-events-none z-0"></div>
+<div class="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-300/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
 
-<section id="work" class="section dark">
-<h2 class="section-title">Selected Work</h2>
-<div class="work-grid">
-<div class="project">
-<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4"></video>
-<h3>AI Fashion Visual System</h3>
-<p>Generative visuals and virtual models for fashion storytelling.</p>
-</div>
-<div class="project">
-<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-digital-art-7983/1080p.mp4"></video>
-<h3>AR Digital Collectibles</h3>
-<p>Blockchain artworks activating augmented reality experiences.</p>
-</div>
-<div class="project">
-<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4"></video>
-<h3>Luxury Ecommerce Experience</h3>
-<p>Customer-centric ecommerce platform integrating digital storytelling.</p>
-</div>
-<div class="project">
-<video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-dj-mixing-music-8291/1080p.mp4"></video>
-<h3>AI Live Visual Performance</h3>
-<p>Real-time generative visuals for immersive audiovisual shows.</p>
-</div>
-</div>
-</section>
+<!-- Dynamic Header Bar -->
+<header id="navbar-header" class="fixed top-0 left-0 right-0 z-40 px-6 py-6">
+    <div id="nav-inner-bar" class="max-w-7xl mx-auto flex items-center justify-between px-5 py-3 rounded-full bg-black/90 backdrop-blur-xl border border-white/10 text-white shadow-2xl">
+        
+        <!-- Logo Wrapper (Left) -->
+        <a href="#" class="logo-wrapper flex items-center gap-3 group">
+            <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-1 shrink-0 border border-white/20 shadow-sm">
+                <svg viewBox="0 0 220 220" class="w-full h-full">
+                    <path d="M 110,10 C 160,10 185,38 185,82 L 185,103 L 135,103 L 135,76 C 135,54 125,43 110,43 C 95,43 85,54 85,76 L 85,144 C 85,166 95,177 110,177 C 125,177 135,166 135,144 L 135,107 L 185,107 L 185,138 C 185,182 160,210 110,210 C 60,210 35,182 35,138 L 35,82 C 35,38 60,10 110,10 Z" fill="#FFDE00" />
+                </svg>
+            </div>
+            <span class="font-extrabold tracking-wider text-sm text-white uppercase transition-colors">CAAPSULA</span>
+        </a>
 
-<section id="practices" class="section">
-<h2 class="section-title">Practices</h2>
-<div class="cap-grid">
-<div class="cap">
-<h3>AI Creative Systems</h3>
-<p>Generative visuals, virtual models, AI music, and synthetic media.</p>
-</div>
-<div class="cap">
-<h3>Fashion Technology</h3>
-<p>AI fashion campaigns, virtual models, and material innovation.</p>
-</div>
-<div class="cap">
-<h3>Immersive Environments</h3>
-<p>Projection mapping, installations, and spatial media experiences.</p>
-</div>
-<div class="cap">
-<h3>Digital Platforms</h3>
-<p>Ecommerce systems, CX platforms, and interactive brand websites.</p>
-</div>
-<div class="cap">
-<h3>Digital Collectibles</h3>
-<p>AR artworks, NFTs, and blockchain digital media.</p>
-</div>
-</div>
-</section>
+        <!-- Center Navigation Pill -->
+        <div id="center-nav-pill" class="flex items-center gap-6">
+            <nav class="hidden md:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider text-gray-300">
+                <a href="#about" class="nav-link transition-colors">About</a>
+                <a href="#services" class="nav-link transition-colors">Services</a>
+                <a href="#work" class="nav-link transition-colors">Work</a>
+                <a href="#faq" class="nav-link transition-colors">FAQ</a>
+            </nav>
 
-<section id="contact" class="section dark">
-<h2>Contact</h2>
-<p class="contact-email">hola@caapsula.com</p>
-<a class="cta" href="mailto:hola@caapsula.com">Start a Project</a>
-</section>
+            <button onclick="openBookingModal()" class="cta-btn hidden sm:inline-block px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-white text-black hover:bg-gray-200 transition-all duration-300 shadow-sm">
+                Book a Call
+            </button>
+        </div>
 
-<script src="script.js"></script>
+        <!-- Mobile Burger Toggle Button -->
+        <button onclick="toggleMobileMenu()" class="mobile-burger-btn md:hidden w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300">
+            <span class="text-lg font-bold">☰</span>
+        </button>
 
-<!-- INTERACTIONS & TRACKING UTILITIES -->
+    </div>
+</header>
+
+<!-- Mobile Navigation Drawer Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-50 flex flex-col justify-between p-8 bg-black/95 backdrop-blur-2xl text-white menu-hidden">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-1 border border-white/20">
+                <svg viewBox="0 0 220 220" class="w-full h-full">
+                    <path d="M 110,10 C 160,10 185,38 185,82 L 185,103 L 135,103 L 135,76 C 135,54 125,43 110,43 C 95,43 85,54 85,76 L 85,144 C 85,166 95,177 110,177 C 125,177 135,166 135,144 L 135,107 L 185,107 L 185,138 C 185,182 160,210 110,210 C 60,210 35,182 35,138 L 35,82 C 35,38 60,10 110,10 Z" fill="#FFDE00" />
+                </svg>
+            </div>
+            <span class="font-bold tracking-wider uppercase">CAAPSULA</span>
+        </div>
+        <button onclick="toggleMobileMenu()" class="text-2xl text-gray-400 hover:text-white">✕</button>
+    </div>
+
+    <nav class="flex flex-col gap-6 text-2xl font-bold">
+        <a href="#about" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">About</a>
+        <a href="#services" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">Services & Pricing</a>
+        <a href="#work" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">Explore Work</a>
+        <a href="#faq" onclick="toggleMobileMenu()" class="hover:text-cadmium-500 transition-colors">FAQs</a>
+    </nav>
+
+    <div class="space-y-4">
+        <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full py-4 rounded-full bg-[#FFDE00] text-black font-bold text-sm hover:bg-[#e6c800] transition-colors">
+            Book a Call
+        </button>
+        <p class="text-xs text-gray-500 text-center">&copy; CAAPSULA Corp.</p>
+    </div>
+</div>
+
+<!-- Main Content Area -->
+<main class="relative z-10 space-y-32 pt-32 pb-20">
+
+    <!-- HERO SECTION -->
+    <section class="max-w-7xl mx-auto px-6 pt-12 md:pt-20">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+            
+            <div class="md:col-span-7 space-y-8">
+                <div class="inline-flex items-center px-3.5 py-1.5 rounded-full creme-card text-xs text-gray-600 tracking-wide uppercase font-semibold">
+                    Culture-Driven Technology Studio
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.08]">
+                    We'll build your idea into a ready to launch platform in 2-weeks
+                </h1>
+                
+                <p class="text-lg text-gray-500 font-normal max-w-xl leading-relaxed">
+                    The culture-first product studio — trusted by startups and founders to design, build, and launch high-impact digital platforms that scale.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <button onclick="openBookingModal()" class="bg-gray-900 text-white font-medium text-sm px-8 py-4 rounded-full hover:bg-black transition-all duration-200 shadow-md flex items-center gap-2">
+                        <span>›</span> Book a Call
+                    </button>
+                    <a href="#services" class="creme-card text-gray-900 font-medium text-sm px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-200">
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+
+            <!-- Featured Video Capsule Card -->
+            <div class="md:col-span-5 relative perspective-1000">
+                <div id="hero-tilt-card" class="creme-card rounded-3xl p-4 relative overflow-hidden group cursor-pointer">
+                    <div class="relative h-96 w-full rounded-2xl overflow-hidden">
+                        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                            <source src="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 space-y-1">
+                            <span class="text-xs uppercase tracking-widest text-white/80 font-semibold">CAAPSULA</span>
+                            <h3 class="text-xl font-bold text-white">Culture x Technology</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-6 page-section">
+        <div class="creme-card rounded-3xl p-8 md:p-16 relative overflow-hidden bg-white">
+            <div class="max-w-3xl space-y-6">
+                <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">About CAAPSULA</span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-snug">
+                    Move faster with AI-powered platform architecture
+                </h2>
+                <p class="text-gray-600 text-lg leading-relaxed pt-2">
+                    CAAPSULA is an AI product studio that builds, designs, and launches digital platforms, e-commerce systems, and custom agents combining modern automation with engineering best practices.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS METRICS & MOVING LOGO CAROUSEL -->
+    <section class="max-w-7xl mx-auto px-6 space-y-16">
+        
+        <!-- Three Stat Cards Grid -->
+        <div class="grid md:grid-cols-3 gap-6">
+            
+            <!-- Stat 1 -->
+            <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
+                <span class="text-xs font-semibold text-gray-500 tracking-tight">Products Built</span>
+                <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
+                    200+
+                </div>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
+                <span class="text-xs font-semibold text-gray-500 tracking-tight">Client Funding</span>
+                <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
+                    $25M+
+                </div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
+                <span class="text-xs font-semibold text-gray-500 tracking-tight">Total VC investments in our clients</span>
+                <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
+                    80+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Moving Brand Logo Carousel -->
+        <div class="space-y-8 pt-4">
+            <p class="text-center text-xs font-semibold text-gray-400 tracking-wide uppercase">
+                Trusted by industry leaders
+            </p>
+
+            <div class="overflow-hidden carousel-mask py-4">
+                <div class="animate-marquee items-center gap-16 text-gray-400 font-bold text-xl uppercase tracking-widest">
+                    
+                    <!-- First Set of Logos -->
+                    <div class="flex items-center gap-16 shrink-0 h-10">
+                        <img src="adidas-13.png" alt="Adidas" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="bbva-2.png" alt="BBVA" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="coca-cola-2021 (1).png" alt="Coca-Cola" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="Conde_Nast_logo.png" alt="Condé Nast" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="meta-3.png" alt="Meta" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="netflix-3.png" alt="Netflix" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="ORGANIZACION_GRUPO_BIMBO-01.png" alt="Grupo Bimbo" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="redbullenergydrink.png" alt="Red Bull" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                    </div>
+
+                    <!-- Duplicate Set for Seamless Loop -->
+                    <div class="flex items-center gap-16 shrink-0 h-10">
+                        <img src="adidas-13.png" alt="Adidas" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="bbva-2.png" alt="BBVA" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="coca-cola-2021 (1).png" alt="Coca-Cola" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="Conde_Nast_logo.png" alt="Condé Nast" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="meta-3.png" alt="Meta" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="netflix-3.png" alt="Netflix" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="ORGANIZACION_GRUPO_BIMBO-01.png" alt="Grupo Bimbo" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="redbullenergydrink.png" alt="Red Bull" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                        <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SERVICES & OFFERINGS SECTION -->
+    <section id="services" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Flexible Pricing</span>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
+                <div>Our Pricing.</div>
+                <div class="text-gray-400 font-normal">Your dedicated tech team.</div>
+            </h2>
+            <p class="text-gray-500 text-sm pt-2">Flexible pricing options designed to match your exact business stage.</p>
+        </div>
+
+        <!-- CENTERED FLEX/GRID CONTAINER -->
+        <div class="grid md:grid-cols-2 lg:flex lg:flex-wrap lg:justify-center gap-8 items-stretch">
+            
+            <!-- Card 1: Online Presence -->
+            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+                <div class="space-y-5">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🌐</div>
+                    <div class="space-y-1">
+                        <h3 class="text-2xl font-bold text-gray-900">Online Presence</h3>
+                        <p class="text-xs text-gray-400 font-medium">Full Website Scratch Build</p>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        For creators and businesses launching an online identity from ground zero.
+                    </p>
+                    
+                    <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
+                        $1,500 <span class="text-xs text-gray-400 font-normal opacity-80">/ One-time</span>
+                    </div>
+                    
+                    <div class="pt-4 space-y-3 border-t border-gray-100">
+                        <span class="text-xs font-semibold text-gray-900">What's included:</span>
+                        <ul class="text-xs text-gray-600 space-y-2.5">
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Fully launched web platform</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Complete Figma design tokens</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Search Engine Optimization (SEO)</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> ChatGPT & AI Generative Positioning</li>
+                        </ul>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('Online Presence ($1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm">Book a Call</button>
+            </div>
+
+            <!-- Card 2: E-Commerce & Apps -->
+            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+                <div class="space-y-5">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">⚡</div>
+                    <div class="space-y-1">
+                        <h3 class="text-2xl font-bold text-gray-900">E-Commerce & Apps</h3>
+                        <p class="text-xs text-gray-400 font-medium">Digital Commerce & Mobile</p>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Full working commerce platform or native mobile app ready to scale.
+                    </p>
+                    
+                    <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
+                        <span class="text-xs text-gray-400 font-normal">From</span> $2,500 <span class="text-xs text-gray-400 font-normal opacity-80">/ One-time</span>
+                    </div>
+                    
+                    <div class="pt-4 space-y-3 border-t border-gray-100">
+                        <span class="text-xs font-semibold text-gray-900">What's included:</span>
+                        <ul class="text-xs text-gray-600 space-y-2.5">
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Shopify, Tiendanube, or Custom Infra</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Native Mobile Application Builds</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Payment gateway integration</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Product design & Figma components</li>
+                        </ul>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('E-Commerce & Mobile Apps (From $2,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm">Book a Call</button>
+            </div>
+
+            <!-- Card 3: Product Sprints -->
+            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+                <div class="space-y-5">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🚀</div>
+                    <div class="space-y-1">
+                        <h3 class="text-2xl font-bold text-gray-900">Product Sprints</h3>
+                        <p class="text-xs text-gray-400 font-medium">Idea-to-Prototype Execution</p>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Turn raw concepts into tangible, working prototypes in 14 days.
+                    </p>
+                    
+                    <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
+                        <span class="text-xs text-gray-400 font-normal">From</span> $1,500 <span class="text-xs text-gray-400 font-normal opacity-80">/ Sprint</span>
+                    </div>
+                    
+                    <div class="pt-4 space-y-3 border-t border-gray-100">
+                        <span class="text-xs font-semibold text-gray-900">Sprint focus:</span>
+                        <ul class="text-xs text-gray-600 space-y-2.5">
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Rapid wireframing & interactive prototypes</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Technical architecture & stack roadmap</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> MVP scoping & feature prioritization</li>
+                        </ul>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('2-Week Product Sprint (From $1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm">Book Sprint</button>
+            </div>
+
+            <!-- Card 4: AI Agents & Upgrades -->
+            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
+                <div class="space-y-5">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-xl">🤖</div>
+                    <div class="space-y-1">
+                        <h3 class="text-2xl font-bold text-gray-900">AI Agents & Upgrades</h3>
+                        <p class="text-xs text-gray-400 font-medium">Platform Intelligence</p>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Custom AI chatbots, agentic e-commerce, and automated upgrades for existing platforms.
+                    </p>
+                    <div class="text-2xl font-extrabold text-gray-900">Price on Request</div>
+                    
+                    <div class="pt-4 space-y-3 border-t border-gray-100">
+                        <span class="text-xs font-semibold text-gray-900">Capabilities:</span>
+                        <ul class="text-xs text-gray-600 space-y-2.5">
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Custom AI Chatbots & Customer Assistants</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Agentic E-Commerce (Autonomous selling agents)</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Automated system workflows & API integrations</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Direct upgrades for existing live platforms</li>
+                        </ul>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('AI Optimizations & Agents (Custom Quote)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm">Request Quote</button>
+            </div>
+
+            <!-- Card 5: Managed Tech Stack Support -->
+            <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white border-2 border-yellow-400/40 lg:w-[calc(33.333%-1.5rem)]">
+                <div class="space-y-5">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🛠</div>
+                    <div class="space-y-1">
+                        <h3 class="text-2xl font-bold text-gray-900">Managed Tech Stack</h3>
+                        <p class="text-xs text-gray-400 font-medium">Monthly Fractional Tech Team</p>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Full operational management of your digital platform without an in-house team.
+                    </p>
+                    <div class="text-2xl font-extrabold text-gray-900">Custom Retainer</div>
+                    
+                    <div class="pt-4 space-y-3 border-t border-gray-100">
+                        <span class="text-xs font-semibold text-gray-900">Scope included:</span>
+                        <ul class="text-xs text-gray-600 space-y-2.5">
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> 24/7 Infrastructure & uptime monitoring</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Security patches, backups & domain health</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Continuous feature updates & optimizations</li>
+                            <li class="flex items-center gap-2.5"><span class="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center text-[10px]">✓</span> Direct engineering communication</li>
+                        </ul>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('Managed Tech Stack Support (Retainer)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm">Request Support</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SELECTED WORK SECTION -->
+    <section id="work" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Portfolio</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mt-1">Explore Work</h2>
+            </div>
+            <p class="text-gray-500 text-sm max-w-xs">We build polished, production-ready applications that look great and scale fast.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
+                <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
+                    <video autoplay muted loop playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <source src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4">
+                    </video>
+                </div>
+                <div class="p-4 space-y-2">
+                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">AI Fashion Visual System</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Generative visuals and virtual models for fashion storytelling.</p>
+                </div>
+            </div>
+
+            <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
+                <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
+                    <video autoplay muted loop playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <source src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4">
+                    </video>
+                </div>
+                <div class="p-4 space-y-2">
+                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">Luxury Ecommerce Experience</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Customer-centric ecommerce platform integrating digital storytelling.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS SECTION -->
+    <section id="faq" class="max-w-4xl mx-auto px-6 space-y-10 pt-10 page-section">
+        <div class="text-center space-y-3">
+            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Questions? Answers.</span>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
+            <p class="text-gray-500 text-sm max-w-md mx-auto">General FAQs regarding our process, tech stack, and delivery.</p>
+        </div>
+
+        <div class="space-y-4">
+            
+            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-gray-900">What is CAAPSULA?</h3>
+                    <span class="faq-icon text-xl text-gray-400 font-light">+</span>
+                </div>
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                    CAAPSULA is a culture-driven technology venture and AI product studio that designs, builds, and launches digital platforms, e-commerce applications, and autonomous AI systems in weeks.
+                </div>
+            </div>
+
+            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-gray-900">What makes CAAPSULA different from other agencies?</h3>
+                    <span class="faq-icon text-xl text-gray-400 font-light">+</span>
+                </div>
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                    We combine rapid AI platform engineering with high-end brand aesthetics. Every build includes design tokens in Figma, SEO, and generative AI positioning so tools like ChatGPT accurately understand your business.
+                </div>
+            </div>
+
+            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-gray-900">How long does a typical build take?</h3>
+                    <span class="faq-icon text-xl text-gray-400 font-light">+</span>
+                </div>
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                    Our 2-Week Sprints ship in 14 days. Web presence builds launch in 2 to 4 weeks, and full e-commerce or native mobile apps take between 4 to 8 weeks depending on custom infrastructure requirements.
+                </div>
+            </div>
+
+            <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-gray-900">How does the Managed Tech Stack retainer work?</h3>
+                    <span class="faq-icon text-xl text-gray-400 font-light">+</span>
+                </div>
+                <div class="faq-answer pt-3 text-sm text-gray-600 leading-relaxed">
+                    If you don't have an in-house engineering team, we take total ownership of your website, e-commerce, hosting, domain routing, security patches, and continuous optimizations under a single custom monthly retainer.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- FLOATING STRATEGY SESSION CALENDAR MODAL -->
+<div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 hidden-modal">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeBookingModal()"></div>
+    
+    <div class="modal-content relative w-full max-w-3xl glass-modal rounded-3xl p-6 md:p-10 z-10 space-y-6 max-h-[90vh] overflow-y-auto">
+        <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-gray-400 hover:text-black text-xl transition-colors">
+            ✕
+        </button>
+
+        <div id="modal-form-view" class="space-y-6">
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold tracking-wide uppercase">
+                    Free Consultation
+                </div>
+                <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
+                    Book your free 30-minute MVP strategy session below
+                </h3>
+                <p class="text-gray-500 text-xs md:text-sm">Select a date, time slot, and tell us about your platform goals.</p>
+            </div>
+
+            <form id="booking-form" class="space-y-6" onsubmit="handleBookingSubmit(event)">
+                
+                <div class="grid md:grid-cols-2 gap-6 p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Select Date</label>
+                        <input type="date" required id="booking-date" class="w-full px-4 py-3 rounded-xl creme-input text-sm text-gray-800 bg-white">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Select Time Slot (EST)</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <input type="radio" name="time_slot" id="slot1" value="10:00 AM" class="hidden time-slot" checked>
+                                <label for="slot1" class="block text-center text-xs font-semibold py-2.5 px-3 rounded-xl border border-gray-200 cursor-pointer transition-all bg-white hover:bg-gray-100">10:00 AM</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="time_slot" id="slot2" value="01:00 PM" class="hidden time-slot">
+                                <label for="slot2" class="block text-center text-xs font-semibold py-2.5 px-3 rounded-xl border border-gray-200 cursor-pointer transition-all bg-white hover:bg-gray-100">01:00 PM</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="time_slot" id="slot3" value="03:30 PM" class="hidden time-slot">
+                                <label for="slot3" class="block text-center text-xs font-semibold py-2.5 px-3 rounded-xl border border-gray-200 cursor-pointer transition-all bg-white hover:bg-gray-100">03:30 PM</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="time_slot" id="slot4" value="05:00 PM" class="hidden time-slot">
+                                <label for="slot4" class="block text-center text-xs font-semibold py-2.5 px-3 rounded-xl border border-gray-200 cursor-pointer transition-all bg-white hover:bg-gray-100">05:00 PM</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Your Name</label>
+                        <input type="text" required placeholder="Alex Rivera" class="w-full px-4 py-3 rounded-xl creme-input text-sm focus:outline-none">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Email Address</label>
+                        <input type="email" required id="booking-email" placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl creme-input text-sm focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Primary Interest</label>
+                    <select id="booking-service-select" class="w-full px-4 py-3 rounded-xl creme-input text-sm text-gray-800 focus:outline-none bg-white">
+                        <option value="Online Presence ($1,500 USD)">Online Presence ($1,500 USD)</option>
+                        <option value="E-Commerce & Mobile Apps (From $2,500 USD)">E-Commerce & Mobile Apps (From $2,500 USD)</option>
+                        <option value="2-Week Product Sprint (From $1,500 USD)">2-Week Product Sprint (From $1,500 USD)</option>
+                        <option value="AI Optimizations & Agents (Custom Quote)">AI Optimizations & Agents (Custom Quote)</option>
+                        <option value="Managed Tech Stack Support (Retainer)">Managed Tech Stack Support (Retainer)</option>
+                        <option value="General Strategy Session">General Strategy Session</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Project Notes (Optional)</label>
+                    <textarea rows="2" placeholder="Briefly share your current project stage or questions..." class="w-full px-4 py-3 rounded-xl creme-input text-sm focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-gray-900 text-white font-semibold text-sm rounded-xl hover:bg-black transition-all duration-200 shadow-md">
+                    Confirm Strategy Session
+                </button>
+            </form>
+        </div>
+
+        <div id="modal-success-view" class="hidden text-center py-8 space-y-4">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
+            <h3 class="text-2xl font-bold text-gray-900">Your Strategy Session is Booked!</h3>
+            <p class="text-gray-600 text-sm max-w-md mx-auto leading-relaxed">
+                We've reserved your 30-minute MVP Strategy Session. A calendar invitation and confirmation email have been sent to <span id="confirmed-email" class="font-semibold text-gray-900"></span>.
+            </p>
+            <div class="pt-4">
+                <button onclick="closeBookingModal()" class="px-8 py-3 bg-gray-900 text-white rounded-xl text-xs font-semibold hover:bg-black transition-all">
+                    Back to Website
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- CREME DIGITAL SIGNATURE DARK FOOTER -->
+<footer class="relative z-10 max-w-7xl mx-auto px-6 pb-12 pt-6">
+    <div class="bg-[#0d0d11] text-white rounded-3xl p-8 md:p-14 space-y-12 shadow-2xl">
+        
+        <div class="max-w-xl space-y-4">
+            <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight">Subscribe to CAAPSULA</h3>
+            <p class="text-gray-400 text-xs md:text-sm">The partner for founders building culture-driven digital products and platforms.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Subscribed to CAAPSULA!');" class="flex items-center bg-white rounded-full p-1.5 max-w-md">
+                <input type="email" required placeholder="Enter email..." class="w-full px-5 py-2 text-xs text-gray-900 bg-transparent focus:outline-none placeholder-gray-400">
+                <button type="submit" class="bg-black text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors shrink-0">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-xs text-gray-400 font-medium pt-4 border-t border-white/10">
+            <div class="space-y-3 flex flex-col">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#" class="hover:text-white transition-colors">Blog</a>
+            </div>
+            <div class="space-y-3 flex flex-col">
+                <a href="#services" class="hover:text-white transition-colors">Pricing</a>
+                <a href="#work" class="hover:text-white transition-colors">Testimonials</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQs</a>
+            </div>
+            <div class="space-y-3 flex flex-col">
+                <button onclick="openBookingModal()" class="hover:text-white transition-colors text-left">Book a Call</button>
+                <a href="mailto:hola@caapsula.com" class="hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 pt-8 border-t border-white/10 gap-4">
+            <div>&copy; CAAPSULA Corp. All rights reserved.</div>
+            <div class="flex gap-6 text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">X / Twitter</a>
+                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-white transition-colors">GitHub</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<!-- 3. INTERACTIONS & LOADER TRACKING SCRIPTS -->
 <script>
+    /* --- INFINITE LOADER ENGINE WITH 20-CLICK BYPASS --- */
     const wrapper = document.getElementById('interactive-wrapper');
+    const stealthLoader = document.getElementById('stealth-loader-screen');
+    let clickCount = 0;
 
-    // Mouse & Touch Kinetic Friction Tracking Engine
     function handleMove(e) {
-        const x = e.clientX || e.touches[0].clientX;
-        const y = e.clientY || e.touches[0].clientY;
+        const x = e.clientX || (e.touches && e.touches[0].clientX);
+        const y = e.clientY || (e.touches && e.touches[0].clientY);
+        if (!x || !y) return;
+
         const offsetX = (x - window.innerWidth / 2) / (window.innerWidth / 2);
         const offsetY = (y - window.innerHeight / 2) / (window.innerHeight / 2);
         
@@ -285,62 +1018,66 @@
     window.addEventListener('mouseleave', handleReset);
     window.addEventListener('touchend', handleReset);
 
+    /* 20-Click Bypass Trigger on Logo */
     wrapper.addEventListener('click', () => {
-        if (wrapper.classList.contains('expanded')) return;
-        
+        clickCount++;
+
+        // Visual bounce pulse on each click
         wrapper.classList.add('expanded');
-        
         setTimeout(() => {
             wrapper.classList.remove('expanded');
             handleReset();
         }, 150);
+
+        // Check for 20 clicks to dismiss loader
+        if (clickCount >= 20) {
+            stealthLoader.style.opacity = '0';
+            stealthLoader.style.visibility = 'hidden';
+            document.body.style.overflow = '';
+        }
     });
 
-    // Language Matrix Engine (Arabic moved after French)
     const languages = [
-        { status: "SYS_STATUS:", node: "NETWORK_NODE:", time: "SYS_TIME:" },               // 1. English
-        { status: "ESTADO_SYS:", node: "NODO_RED:", time: "TIEMPO_SYS:" },                // 2. Spanish
-        { status: "SYS_STATUS:", node: "NETZWERKKNOTEN:", time: "SYS_ZEIT:" },            // 3. German
-        { status: "STATUT_SYS:", node: "NOEUD_RESEAU:", time: "TEMPS_SYS:" },             // 4. French
-        { status: "حالة_النظام:", node: "عقدة_الشبكة:", time: "وقت_النظام:" },              // 5. Arabic (Moved here)
-        { status: "系统状态:", node: "网络节点:", time: "系统时间:" },                       // 6. Chinese
-        { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },      // 7. Japanese
-        { status: "시스템_상태:", node: "네트워크_노드:", time: "시스템_시간:" },              // 8. Korean
-        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },                 // 9. Italian
-        { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },       // 10. Greek
-        { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },               // 11. Portuguese
-        { status: "सिस्टम_स्थिति:", node: "नेटवर्क_नोड:", time: "सिस्टम_समय:" },              // 12. Hindi
-        { status: "СИС_СТАТУС:", node: "УЗЕЛ_СЕТИ:", time: "СИС_ВРЕМЯ:" },                // 13. Russian
-        { status: "สถานะ_ระบบ:", node: "โหนด_เครือข่าย:", time: "เวลา_ระบบ:" }               // 14. Thai
+        { status: "SYS_STATUS:", node: "NETWORK_NODE:", time: "SYS_TIME:" },
+        { status: "ESTADO_SYS:", node: "NODO_RED:", time: "TIEMPO_SYS:" },
+        { status: "SYS_STATUS:", node: "NETZWERKKNOTEN:", time: "SYS_ZEIT:" },
+        { status: "STATUT_SYS:", node: "NOEUD_RESEAU:", time: "TEMPS_SYS:" },
+        { status: "حالة_النظام:", node: "عقدة_الشبكة:", time: "وقت_النظام:" },
+        { status: "系统状态:", node: "网络节点:", time: "系统时间:" },
+        { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },
+        { status: "システム_상태:", node: "네트워크_노드:", time: "시스템_시간:" },
+        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },
+        { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },
+        { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },
+        { status: "सिस्टम_स्थिति:", node: "नेटवर्क_नोड:", time: "सिस्टम_समय:" },
+        { status: "СИС_СТАТУС:", node: "УЗЕЛ_СЕТИ:", time: "СИС_ВРЕМЯ:" },
+        { status: "สถานะ_ระบบ:", node: "โหนด_เครือข่าย:", time: "เวลา_ระบบ:" }
     ];
 
-    // Status strings matched completely to the target cycle sequence
     const statusStringsByLanguage = [
-        ["INITIALIZING_HANDSHAKE", "OPTIMIZING_TRANSACTIONS", "SECURED_PING_LOOP", "ESTABLISHING_METRICS"], // English
-        ["INICIALIZANDO_ENLACE", "OPTIMIZANDO_TRANSACCIONES", "BUCLE_PING_SEGURO", "ESTABLECIENDO_METRICAS"], // Spanish
-        ["INITIALISIERE_HANDSHAKE", "OPTIMIERE_TRANSAKTIONEN", "SICHERE_PING_SCHLEIFE", "METRIKEN_ERSTELLEN"], // German
-        ["INITIALISATION_CONNEXION", "OPTIMISATION_TRANSACTIONS", "BOUCLE_PING_SECURISEE", "ETABLISSEMENT_METRIQUES"], // French
-        ["جاري_بدء_المصافحة", "جاري_تحسين_المعاملات", "حلقة_بينغ_آمنة", "تأسيس_المقاييس"], // Arabic
-        ["正在初始化握手", "正在优化交易", "安全连接循环", "正在建立度量标准"], // Chinese
-        ["ハンドシェイクを初期化中", "トランザクションを最適化中", "安全なピングループ", "メトリクスを確立中"], // Japanese
-        ["핸드셰이크_초기화중", "트랜잭션_최적화중", "보안_핑_루พ", "เมทริก_설정중"], // Korean
-        ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"], // Italian
-        ["ΑΡΧΙΚΟΠΟΙΗΣΗ_ΣΥΝΔΕΣΗΣ", "ΒΕΛΤΙΣΤΟΠΟΙΗΣΗ_ΣΥΝΑΛΛΑΓΩΝ", "ΑΣΦΑΛΗΣ_ΚΥΚΛΟΣ_PING", "ΚΑΘΟΡΙΣΜΟΣ_ΔΕΙΚΤΩΝ"], // Greek
-        ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"], // Portuguese
-        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_लूप", "मीट्रिक_स्थापना"], // Hindi
-        ["ИНИЦИАЛИЗАЦИЯ_СВЯЗИ", "ОПТИМИЗАЦИЯ_ТРАНЗАКЦИЙ", "ЗАЩИЩЕННЫЙ_ПИНГ_ЦИКЛ", "УСТАНОВКА_МЕТРИК"], // Russian
-        ["กำลังเริ่มการเชื่อมต่อ", "กำลังปรับปรุงธุรกรรม", "ระบบตรวจสอบเครือข่ายปลอดภัย", "กำลังตั้งค่าพารามิเตอร์"] // Thai
+        ["INITIALIZING_HANDSHAKE", "OPTIMIZING_TRANSACTIONS", "SECURED_PING_LOOP", "ESTABLISHING_METRICS"],
+        ["INICIALIZANDO_ENLACE", "OPTIMIZANDO_TRANSACCIONES", "BUCLE_PING_SEGURO", "ESTABLECIENDO_METRICAS"],
+        ["INITIALISIERE_HANDSHAKE", "OPTIMIERE_TRANSAKTIONEN", "SICHERE_PING_SCHLEIFE", "METRIKEN_ERSTELLEN"],
+        ["INITIALISATION_CONNEXION", "OPTIMISATION_TRANSACTIONS", "BOUCLE_PING_SECURISEE", "ETABLISSEMENT_METRIQUES"],
+        ["جاري_بدء_المصافحة", "جاري_تحسين_المعاملات", "حلقة_بينغ_آمنة", "تأسيس_المقاييس"],
+        ["正在初始化握手", "正在优化交易", "安全连接循环", "正在建立度量标准"],
+        ["ハンドシェイクを初期化中", "トランザクションを最適化中", "安全なピングループ", "メトリクスを確立中"],
+        ["핸드셰이크_초기화중", "트랜잭션_최적화중", "보안_핑_루พ", "เมทริก_설정중"],
+        ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"],
+        ["ΑΡΧΙΚΟΠΟΙΗΣΗ_ΣΥΝΔΕΣΗΣ", "ΒΕΛΤΙΣΤΟΠΟΙΗΣΗ_ΣΥΝΑΛΛΑΓΩΝ", "ΑΣΦΑΛΗΣ_ΚΥΚΛΟΣ_PING", "ΚΑΘΟΡΙΣΜΟΣ_ΔΕΙΚΤΩΝ"],
+        ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"],
+        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_लूप", "मीट्रिक_स्थापना"],
+        ["ИНИЦИАЛИЗАЦИЯ_СВЯЗИ", "ОПТИМИЗАЦИЯ_ТРАНЗАКЦИЙ", "ЗАЩИЩЕННЫЙ_ПИНГ_ЦИКЛ", "УСТАНОВКА_МЕТРИК"],
+        ["กำลังเริ่มการเชื่อมต่อ", "กำลังปรับปรุงธุรกรรม", "ระบบตรวจสอบเครือข่ายปลอดภัย", "กำลังตั้งค่าพารามิเตอร์"]
     ];
 
     let currentLangIndex = 0;
     let currentStatusIndex = 0;
 
-    // UI Label Elements
     const labelStatusEl = document.getElementById('label-status');
     const labelNodeEl = document.getElementById('label-node');
     const labelTimeEl = document.getElementById('label-time');
 
-    // UI Dynamic Data Elements
     const statusEl = document.getElementById('terminal-status');
     const nodeEl = document.getElementById('node-metric');
     const timeEl = document.getElementById('live-timestamp');
@@ -349,7 +1086,6 @@
         const currentLang = languages[currentLangIndex];
         const statusPool = statusStringsByLanguage[currentLangIndex];
 
-        // 1. Update system labels and dynamic metrics in the current language
         labelStatusEl.textContent = currentLang.status;
         labelNodeEl.textContent = currentLang.node;
         labelTimeEl.textContent = currentLang.time;
@@ -357,13 +1093,11 @@
         statusEl.textContent = statusPool[currentStatusIndex];
         nodeEl.textContent = `10.98.${Math.floor(Math.random() * 89 + 10)}.${Math.floor(Math.random() * 250)}`;
 
-        // 2. Cycle to the next string inside the current language pool
         currentStatusIndex++;
 
-        // 3. When the current language completes its full loop cycle, shift to the next language
         if (currentStatusIndex >= statusPool.length) {
-            currentStatusIndex = 0; // Reset text status loop
-            currentLangIndex = (currentLangIndex + 1) % languages.length; // Jump to next language
+            currentStatusIndex = 0;
+            currentLangIndex = (currentLangIndex + 1) % languages.length;
         }
     }, 4000);
 
@@ -373,6 +1107,176 @@
         requestAnimationFrame(tickClock);
     }
     requestAnimationFrame(tickClock);
+
+    /* --- WEBSITE NAVBAR TRANSFORM & ACTIVE SECTION TRACKER --- */
+    const sections = document.querySelectorAll('.page-section');
+    const navLinks = document.querySelectorAll('#center-nav-pill .nav-link');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+            document.body.classList.add('nav-scrolled');
+        } else {
+            document.body.classList.remove('nav-scrolled');
+        }
+
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 150;
+            const sectionHeight = section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active-link');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active-link');
+            }
+        });
+    });
+
+    /* --- MOBILE BURGER MENU TOGGLE --- */
+    const mobileMenu = document.getElementById('mobile-menu');
+    function toggleMobileMenu() {
+        if (mobileMenu.classList.contains('menu-hidden')) {
+            mobileMenu.classList.remove('menu-hidden');
+            mobileMenu.classList.add('menu-visible');
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.remove('menu-visible');
+            mobileMenu.classList.add('menu-hidden');
+            document.body.style.overflow = '';
+        }
+    }
+
+    /* --- DATE PICKER DEFAULT --- */
+    const dateInput = document.getElementById('booking-date');
+    if (dateInput) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.value = tomorrow.toISOString().split('T')[0];
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+    }
+
+    /* --- BOOKING MODAL CONTROLS --- */
+    const bookingModal = document.getElementById('booking-modal');
+    const bookingServiceSelect = document.getElementById('booking-service-select');
+    const formView = document.getElementById('modal-form-view');
+    const successView = document.getElementById('modal-success-view');
+
+    function openBookingModal(defaultService = '') {
+        if (defaultService && bookingServiceSelect) {
+            bookingServiceSelect.value = defaultService;
+        }
+        formView.classList.remove('hidden');
+        successView.classList.add('hidden');
+        bookingModal.classList.remove('hidden-modal');
+        bookingModal.classList.add('visible-modal');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+        bookingModal.classList.remove('visible-modal');
+        bookingModal.classList.add('hidden-modal');
+        document.body.style.overflow = '';
+    }
+
+    function handleBookingSubmit(e) {
+        e.preventDefault();
+        const userEmail = document.getElementById('booking-email').value;
+        document.getElementById('confirmed-email').textContent = userEmail;
+        formView.classList.add('hidden');
+        successView.classList.remove('hidden');
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeBookingModal();
+    });
+
+    /* --- FAQ ACCORDION TOGGLE --- */
+    function toggleFaq(element) {
+        const isActive = element.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+        if (!isActive) {
+            element.classList.add('active');
+        }
+    }
+
+    /* --- LIGHT CANVAS PARTICLES --- */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.2;
+            this.speedY = (Math.random() - 0.5) * 0.2;
+            this.opacity = Math.random() * 0.15 + 0.05;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        draw() {
+            ctx.fillStyle = `rgba(0, 0, 0, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < 40; i++) {
+        particles.push(new Particle());
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* --- 3D CARD TILT FX --- */
+    function applyTiltEffect(element) {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -5;
+            const rotateY = ((x - centerX) / centerX) * 5;
+
+            element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+        });
+
+        element.addEventListener('mouseleave', () => {
+            element.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+    }
+
+    const heroCard = document.getElementById('hero-tilt-card');
+    if (heroCard) applyTiltEffect(heroCard);
+
+    document.querySelectorAll('.tilt-project').forEach(card => applyTiltEffect(card));
 </script>
 
 </body>
