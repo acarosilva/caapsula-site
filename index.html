@@ -7,12 +7,13 @@
 <meta name="format-detection" content="telephone=no">
 <title id="page-title">CAAPSULA — Culture-driven Technologies</title>
 
-<!-- OPTIMIZACIÓN DE RED: Preconexiones y Preload del video principal -->
-<link rel="preload" as="video" href="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4">
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="preconnect" href="https://cdn.coverr.co">
+<!-- OPTIMIZACIÓN DE RED: Preloads agresivos en segundo plano -->
+<link rel="preload" as="script" href="https://cdn.tailwindcss.com">
+<link rel="preload" as="video" href="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4" type="video/mp4">
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+<link rel="preconnect" href="https://cdn.coverr.co" crossorigin>
 
-<!-- Tailwind CSS CDN con DEFER para no bloquear la pantalla negra de carga inicial -->
+<!-- Tailwind CSS CDN con DEFER para procesar CSS mientras la pantalla negra está activa -->
 <script src="https://cdn.tailwindcss.com" defer></script>
 <script>
     tailwind.config = {
@@ -168,6 +169,7 @@
     #navbar-header { transition: padding 0.3s ease; }
     #nav-inner-bar { transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease; }
 
+    /* Scrolled State for ALL screen sizes */
     body.nav-scrolled #nav-inner-bar {
         background-color: transparent !important;
         border-color: transparent !important;
@@ -179,10 +181,12 @@
 
     body.nav-scrolled .logo-wrapper span { color: #111116 !important; }
 
+    /* Desktop Specific Scrolled Pill Settings */
     @media (min-width: 768px) {
         body.nav-scrolled #center-nav-pill {
             background-color: rgba(245, 243, 230, 0.85) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border: 1px solid rgba(0, 0, 0, 0.08) !important;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
             padding: 5px 6px 5px 20px !important;
@@ -193,11 +197,14 @@
         body.nav-scrolled #center-nav-pill a:hover,
         body.nav-scrolled #center-nav-pill a.active-link { color: #111116 !important; font-weight: 700 !important; }
         body.nav-scrolled #center-nav-pill .cta-btn { background-color: #111116 !important; color: #ffffff !important; }
+        
+        /* Scrolled state adjustment for language button text */
         body.nav-scrolled #lang-btn { background-color: rgba(0, 0, 0, 0.05) !important; border-color: rgba(0, 0, 0, 0.08) !important; }
         body.nav-scrolled #current-lang-label { color: #111116 !important; }
         body.nav-scrolled #lang-arrow { color: #6b7280 !important; }
     }
 
+    /* Mobile Specific Scrolled Burger Button Settings */
     @media (max-width: 767px) {
         body.nav-scrolled .mobile-burger-btn {
             background-color: #111116 !important;
@@ -206,6 +213,7 @@
         }
     }
 
+    /* Modal Animation Classes */
     #booking-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
     #booking-modal.hidden-modal { opacity: 0; visibility: hidden; pointer-events: none; }
     #booking-modal.visible-modal { opacity: 1; visibility: visible; pointer-events: auto; }
@@ -213,21 +221,26 @@
     #booking-modal.hidden-modal .modal-content { transform: scale(0.95) translateY(20px); }
     #booking-modal.visible-modal .modal-content { transform: scale(1) translateY(0); }
 
+    /* FAQ Accordion Transitions */
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease; opacity: 0; }
     .faq-item.active .faq-answer { max-height: 200px; opacity: 1; }
     .faq-icon { transition: transform 0.3s ease; }
     .faq-item.active .faq-icon { transform: rotate(45deg); }
 
+    /* Time Slot Radio styling */
     .time-slot:checked + label { background-color: #111116; color: #ffffff; border-color: #111116; }
 
+    /* Mobile Menu Drawer Animation */
     #mobile-menu { transition: opacity 0.3s ease, visibility 0.3s ease; }
     #mobile-menu.menu-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     #mobile-menu.menu-visible { opacity: 1; visibility: visible; pointer-events: auto; }
 
+    /* LOGO CAROUSEL INFINITE MARQUEE ANIMATION */
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
     .animate-marquee:hover { animation-play-state: paused; }
 
+    /* MASK FOR CAROUSEL FADE EDGES */
     .carousel-mask {
         mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -274,6 +287,7 @@
                             keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1" />
                     </rect>
                 </clipPath>
+                <!-- ASYMMETRIC LOGO PATH PROFILE -->
                 <path id="pill-shape" d="M 110,10 C 160,10 185,38 185,82 L 185,103 L 135,103 L 135,76 C 135,54 125,43 110,43 C 95,43 85,54 85,76 L 85,144 C 85,166 95,177 110,177 C 125,177 135,166 135,144 L 135,107 L 185,107 L 185,138 C 185,182 160,210 110,210 C 60,210 35,182 35,138 L 35,82 C 35,38 60,10 110,10 Z" />
             </defs>
             <use href="#pill-shape" class="capsule-bg" />
@@ -301,14 +315,11 @@
 
 <!-- 2. MAIN WEBSITE CONTENT -->
 
-<!-- Subtle Yellow Cadmium Ambient Glows -->
-<div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#FFDE00]/15 rounded-full blur-[180px] pointer-events-none z-0"></div>
-<div class="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-300/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
-
 <!-- Dynamic Header Bar -->
 <header id="navbar-header" class="fixed top-0 left-0 right-0 z-40 px-6 py-6">
     <div id="nav-inner-bar" class="max-w-7xl mx-auto flex items-center justify-between px-5 py-3 rounded-full bg-black/90 backdrop-blur-xl border border-white/10 text-white shadow-2xl">
         
+        <!-- Logo Wrapper (Left) -->
         <a href="#" class="logo-wrapper flex items-center gap-3 group">
             <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-1 shrink-0 border border-white/20 shadow-sm">
                 <svg viewBox="0 0 220 220" class="w-full h-full">
@@ -318,6 +329,7 @@
             <span class="font-extrabold tracking-wider text-sm text-white uppercase transition-colors">CAAPSULA</span>
         </a>
 
+        <!-- Center Navigation Pill -->
         <div id="center-nav-pill" class="flex items-center gap-4">
             <nav class="hidden md:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider text-gray-300">
                 <a href="#about" class="nav-link transition-colors" data-en="About" data-es="Acerca de">About</a>
@@ -331,23 +343,25 @@
                     Book a Call
                 </button>
                 
+                <!-- Desktop Language Dropdown Component -->
                 <div class="relative">
                     <button onclick="toggleLangDropdown()" id="lang-btn" class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-full border border-white/10 hover:bg-white/20 transition-all focus:outline-none">
                         <svg class="w-4 h-3 rounded-sm object-cover shadow-sm" id="desktop-flag"><use href="#flag-us"></use></svg>
                         <span class="text-[11px] font-bold uppercase tracking-wider text-white" id="current-lang-label">EN</span>
                         <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>
                     </button>
+                    <!-- Dropdown Menu -->
                     <div id="lang-dropdown" class="absolute right-0 mt-2 w-36 bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                         <button onclick="switchLanguage('EN')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><use href="#flag-us"></use></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-us"></use></svg> 
                                 English
                             </span>
                             <span class="text-[10px] text-amber-400" id="check-en">✓</span>
                         </button>
                         <button onclick="switchLanguage('ES')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><use href="#flag-mx"></use></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-mx"></use></svg> 
                                 Español
                             </span>
                             <span class="text-[10px] text-amber-400 hidden" id="check-es">✓</span>
@@ -357,6 +371,7 @@
             </div>
         </div>
 
+        <!-- Mobile Burger Toggle Button -->
         <button onclick="toggleMobileMenu()" class="mobile-burger-btn md:hidden w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300">
             <span class="text-lg font-bold">☰</span>
         </button>
@@ -364,6 +379,7 @@
     </div>
 </header>
 
+<!-- Mobile Navigation Drawer Overlay -->
 <div id="mobile-menu" class="fixed inset-0 z-50 flex flex-col justify-between p-8 bg-black/95 backdrop-blur-2xl text-white menu-hidden">
     <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -389,24 +405,26 @@
             Book a Call
         </button>
         
+        <!-- Mobile Language Selector Accordion -->
         <div class="relative">
             <button onclick="toggleMobileLangDropdown()" id="mobile-lang-btn" class="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 transition-all">
                 <div class="flex items-center gap-3">
-                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 640 480"><use href="#flag-us"></use></svg>
+                    <svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm"><use href="#flag-us"></use></svg>
                     <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">English (US)</span>
                 </div>
                 <span class="text-sm text-gray-400 font-bold transition-transform duration-200" id="mobile-lang-arrow">▼</span>
             </button>
+            <!-- Mobile Dropdown Menu -->
             <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                 <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><use href="#flag-us"></use></svg> 
+                        <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-us"></use></svg> 
                         English (US)
                     </span>
                 </button>
                 <button onclick="switchLanguage('ES');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><use href="#flag-mx"></use></svg> 
+                        <svg class="w-4 h-3 rounded-sm object-cover"><use href="#flag-mx"></use></svg> 
                         Español (MX)
                     </span>
                 </button>
@@ -419,6 +437,7 @@
 
 <main class="relative z-10 space-y-32 pt-32 pb-20">
 
+    <!-- HERO SECTION -->
     <section class="max-w-7xl mx-auto px-6 pt-12 md:pt-20">
         <div class="grid md:grid-cols-12 gap-12 items-center">
             
@@ -445,10 +464,11 @@
                 </div>
             </div>
 
+            <!-- Featured Video Capsule Card con Preload="auto" para carga inmediata -->
             <div class="md:col-span-5 relative perspective-1000">
                 <div id="hero-tilt-card" class="creme-card rounded-3xl p-4 relative overflow-hidden group cursor-pointer">
                     <div class="relative h-96 w-full rounded-2xl overflow-hidden bg-black">
-                        <video autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover">
+                        <video autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover">
                             <source src="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4" type="video/mp4">
                         </video>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -463,6 +483,7 @@
         </div>
     </section>
 
+    <!-- ABOUT SECTION -->
     <section id="about" class="max-w-7xl mx-auto px-6 page-section">
         <div class="creme-card rounded-3xl p-8 md:p-16 relative overflow-hidden bg-white">
             <div class="max-w-3xl space-y-6">
@@ -477,6 +498,7 @@
         </div>
     </section>
 
+    <!-- STATS METRICS & MOVING LOGO CAROUSEL -->
     <section class="max-w-7xl mx-auto px-6 space-y-16">
         
         <div class="grid md:grid-cols-3 gap-6">
@@ -699,6 +721,7 @@
         <div class="grid md:grid-cols-2 gap-8">
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6 bg-gray-100">
+                    <!-- Lazy loaded video -->
                     <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <source data-src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4" type="video/mp4">
                     </video>
@@ -711,6 +734,7 @@
 
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
                 <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6 bg-gray-100">
+                    <!-- Lazy loaded video -->
                     <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <source data-src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4" type="video/mp4">
                     </video>
@@ -880,7 +904,7 @@
     <div class="bg-[#0d0d11] text-white rounded-3xl p-8 md:p-14 space-y-12 shadow-2xl">
         <div class="max-w-none space-y-4 text-left md:text-center">
             <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight" data-en="Subscribe to CAAPSULA" data-es="Suscríbete a CAAPSULA">Subscribe to CAAPSULA</h3>
-            <p class="text-gray-400 text-xs md:text-sm" data-en="The partner for founders building culture-driven digital products and platforms." data-es="El socio para fundadores que construyen productos y plataformas digitales impulsados por la cultura.">The partner for founders building culture-driven digital products and platforms.</p>
+            <p class="text-gray-400 text-xs md:text-sm" data-en="The partner for founders building culture-driven digital products and platforms." data-es="El socio para fundadores que construyen productos y platforms digitales impulsados por la cultura.">The partner for founders building culture-driven digital products and platforms.</p>
             
             <form onsubmit="event.preventDefault(); alert(currentLang === 'ES' ? '¡Suscrito a CAAPSULA!' : 'Subscribed to CAAPSULA!');" class="flex items-center bg-white rounded-full p-1.5 w-full">
                 <input type="email" required placeholder="Enter email..." id="footer-input" class="w-full px-5 py-2 text-xs text-gray-900 bg-transparent focus:outline-none placeholder-gray-400">
@@ -1047,14 +1071,24 @@
             }
         });
 
+        // Close dropdowns
         document.getElementById('lang-dropdown').classList.add('hidden');
         const mobileDropdown = document.getElementById('mobile-lang-dropdown');
         if (mobileDropdown) mobileDropdown.classList.add('hidden');
         
+        // Reset dropdown arrows
         const desktopArrow = document.getElementById('lang-arrow');
         if(desktopArrow) desktopArrow.style.transform = 'rotate(0deg)';
         const mobileArrow = document.getElementById('mobile-lang-arrow');
         if(mobileArrow) mobileArrow.style.transform = 'rotate(0deg)';
+
+        // FORCE CLOSE MOBILE MENU AFTER LANGUAGE SELECTION
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu && mobileMenu.classList.contains('menu-visible')) {
+            mobileMenu.classList.remove('menu-visible');
+            mobileMenu.classList.add('menu-hidden');
+            document.body.style.overflow = '';
+        }
     }
 
     window.addEventListener('click', (e) => {
@@ -1104,7 +1138,7 @@
         ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"],
         ["ΑΡΧΙΚΟΠΟΙΗΣΗ_ΣΥΝΔΕΣΗΣ", "ΒΕΛΤΙΣΤΟΠΟΙΗΣΗ_ΣΥΝΑΛΛΑΓΩΝ", "ΑΣΦΑΛΗΣ_ΚΥΚΛΟΣ_PING", "ΚΑΘΟΡΙΣΜΟΣ_ΔΕΙΚΤΩΝ"],
         ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"],
-        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_लूप", "मीट्रिक_स्थापना"],
+        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_لूप", "मीट्रिक_स्थापना"],
         ["ИНИЦИАЛИЗАЦИЯ_СВЯЗИ", "ОПТИМИЗАЦИЯ_ТРАНЗАКЦИЙ", "ЗАЩИЩЕННЫЙ_ПИНГ_ЦИКЛ", "УСТАНОВКА_МЕТРИК"],
         ["กำลังเริ่มการเชื่อมต่อ", "กำลังปรับปรุงธุรกรรม", "ระบบตรวจสอบเครือข่ายปลอดภัย", "กำลังตั้งค่าพารามิเตอร์"]
     ];
