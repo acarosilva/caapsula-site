@@ -504,13 +504,13 @@
             </button>
             <!-- Mobile Dropdown Menu -->
             <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
-                <button onclick="switchLanguage('EN'); toggleMobileLangDropdown();" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
+                <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
                         <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg> 
                         English (US)
                     </span>
                 </button>
-                <button onclick="switchLanguage('ES'); toggleMobileLangDropdown();" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                <button onclick="switchLanguage('ES');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
                         <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg> 
                         Español (MX)
@@ -1164,7 +1164,8 @@
 
         // Close dropdowns after selection
         document.getElementById('lang-dropdown').classList.add('hidden');
-        document.getElementById('mobile-lang-dropdown').classList.add('hidden');
+        const mobileDropdown = document.getElementById('mobile-lang-dropdown');
+        if (mobileDropdown) mobileDropdown.classList.add('hidden');
         
         // Reset dropdown arrows
         const desktopArrow = document.getElementById('lang-arrow');
@@ -1182,6 +1183,14 @@
             const arrow = document.getElementById('lang-arrow');
             if(arrow) arrow.style.transform = 'rotate(0deg)';
         }
+
+        const mobileLangBtn = document.getElementById('mobile-lang-btn');
+        const mobileDropdown = document.getElementById('mobile-lang-dropdown');
+        if (mobileLangBtn && mobileDropdown && !mobileLangBtn.contains(e.target) && !mobileDropdown.contains(e.target)) {
+            mobileDropdown.classList.add('hidden');
+            const mobileArrow = document.getElementById('mobile-lang-arrow');
+            if(mobileArrow) mobileArrow.style.transform = 'rotate(0deg)';
+        }
     });
 
     const languages = [
@@ -1193,7 +1202,7 @@
         { status: "系统状态:", node: "网络节点:", time: "系统时间:" },
         { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },
         { status: "システム_상태:", node: "네트워크_노드:", time: "시스템_시간:" },
-        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },
+        { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPS_SYS:" },
         { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },
         { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },
         { status: "सिस्टम_स्थिति:", node: "नेटवर्क_नोड:", time: "सिस्टम_समय:" },
@@ -1213,7 +1222,7 @@
         ["INIZIALIZZAZIONE_CONNESSIONE", "OTTIMIZZAZIONE_TRANSAZIONI", "LOOP_PING_SICURO", "STABILENDO_METRICHE"],
         ["ΑΡΧΙΚΟΠΟΙΗΣΗ_ΣΥΝΔΕΣΗΣ", "ΒΕΛΤΙΣΤΟΠΟΙΗΣΗ_ΣΥΝΑΛΛΑΓΩΝ", "ΑΣΦΑΛΗΣ_ΚΥΚΛΟΣ_PING", "ΚΑΘΟΡΙΣΜΟΣ_ΔΕΙΚΤΩΝ"],
         ["INICIALIZANDO_CONEXÃO", "OTIMIZANDO_TRANSAÇÕES", "LOOP_DE_PING_SEGURO", "ESTABELECENDO_MÉTRICAS"],
-        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_लूप", "मीट्रिक_स्थापना"],
+        ["हैंडशेक_प्रारंभ", "लेनदेन_इष्टतमीकरण", "सुरक्षित_पिंग_لूप", "मीट्रिक_स्थापना"],
         ["ИНИЦИАЛИЗАЦИЯ_СВЯЗИ", "ОПТИМИЗАЦИЯ_ТРАНЗАКЦИЙ", "ЗАЩИЩЕННЫЙ_ПИНГ_ЦИКЛ", "УСТАНОВКА_МЕТРИК"],
         ["กำลังเริ่มการเชื่อมต่อ", "กำลังปรับปรุงธุรกรรม", "ระบบตรวจสอบเครือข่ายปลอดภัย", "กำลังตั้งค่าพารามิเตอร์"]
     ];
