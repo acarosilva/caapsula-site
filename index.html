@@ -329,7 +329,7 @@
 </style>
 </head>
 
-<body class="relative min-h-screen selection:bg-[#FFDE00] selection:text-black">
+<body class="relative min-h-screen selection:bg-[#FFDE00] selection:text-black" style="overflow: hidden;">
 
 <!-- 1. INFINITE GATE OVERLAY SCREEN WITH 20-CLICK BYPASS -->
 <div id="stealth-loader-screen">
@@ -1029,11 +1029,11 @@
             handleReset();
         }, 150);
 
-        // Check for 20 clicks to dismiss loader
+        // Check for 20 clicks to dismiss loader and restore scrolling
         if (clickCount >= 20) {
             stealthLoader.style.opacity = '0';
             stealthLoader.style.visibility = 'hidden';
-            document.body.style.overflow = '';
+            document.body.style.overflow = 'auto'; // Restores page scrolling
         }
     });
 
@@ -1146,7 +1146,7 @@
         } else {
             mobileMenu.classList.remove('menu-visible');
             mobileMenu.classList.add('menu-hidden');
-            document.body.style.overflow = '';
+            document.body.style.overflow = 'auto';
         }
     }
 
@@ -1179,7 +1179,7 @@
     function closeBookingModal() {
         bookingModal.classList.remove('visible-modal');
         bookingModal.classList.add('hidden-modal');
-        document.body.style.overflow = '';
+        document.body.style.overflow = 'auto';
     }
 
     function handleBookingSubmit(e) {
