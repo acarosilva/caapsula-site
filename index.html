@@ -37,7 +37,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh;
+        height: 100dvh; /* Uses dynamic viewport height to completely cover mobile screens */
         background-color: #050505;
         color: #ffffff;
         font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, monospace;
@@ -1033,7 +1033,7 @@
         if (clickCount >= 20) {
             stealthLoader.style.opacity = '0';
             stealthLoader.style.visibility = 'hidden';
-            document.body.style.overflow = 'auto'; // Restores page scrolling
+            document.body.style.overflow = ''; // Restores full scrolling capabilities
         }
     });
 
@@ -1146,7 +1146,7 @@
         } else {
             mobileMenu.classList.remove('menu-visible');
             mobileMenu.classList.add('menu-hidden');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }
     }
 
@@ -1179,7 +1179,7 @@
     function closeBookingModal() {
         bookingModal.classList.remove('visible-modal');
         bookingModal.classList.add('hidden-modal');
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = '';
     }
 
     function handleBookingSubmit(e) {
