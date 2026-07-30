@@ -431,7 +431,7 @@
                     Book a Call
                 </button>
                 
-                <!-- Desktop Language Dropdown Component with SVG Flags (Spain / USA) -->
+                <!-- Desktop Language Dropdown Component with SVG Flags (Mexico / USA) -->
                 <div class="relative">
                     <button onclick="toggleLangDropdown()" id="lang-btn" class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-full border border-white/10 hover:bg-white/20 transition-all focus:outline-none">
                         <svg class="w-4 h-3 rounded-sm object-cover shadow-sm" id="desktop-flag" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>
@@ -449,7 +449,7 @@
                         </button>
                         <button onclick="switchLanguage('ES')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg> 
+                                <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg> 
                                 Español
                             </span>
                             <span class="text-[10px] text-amber-400 hidden" id="check-es">✓</span>
@@ -504,16 +504,16 @@
             </button>
             <!-- Mobile Dropdown Menu -->
             <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
-                <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
+                <button onclick="switchLanguage('EN'); toggleMobileLangDropdown();" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
                         <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg> 
                         English (US)
                     </span>
                 </button>
-                <button onclick="switchLanguage('ES');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                <button onclick="switchLanguage('ES'); toggleMobileLangDropdown();" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
-                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg> 
-                        Español (ES)
+                        <svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg> 
+                        Español (MX)
                     </span>
                 </button>
             </div>
@@ -687,7 +687,7 @@
                     </p>
                     
                     <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
-                        $1,500 <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ One-time" data-es="/ Único pago">/ One-time</span>
+                        <span class="text-xs text-gray-400 font-normal" data-en="From " data-es="Desde ">From </span><span data-en="$1,500" data-es="$28,000 MXN">$1,500</span> <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ One-time" data-es="/ Único pago">/ One-time</span>
                     </div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
@@ -716,7 +716,7 @@
                     </p>
                     
                     <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
-                        <span class="text-xs text-gray-400 font-normal" data-en="From" data-es="Desde">From</span> $2,500 <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ One-time" data-es="/ Único pago">/ One-time</span>
+                        <span class="text-xs text-gray-400 font-normal" data-en="From " data-es="Desde ">From </span><span data-en="$2,500" data-es="$48,000 MXN">$2,500</span> <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ One-time" data-es="/ Único pago">/ One-time</span>
                     </div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
@@ -745,7 +745,7 @@
                     </p>
                     
                     <div class="text-3xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block">
-                        <span class="text-xs text-gray-400 font-normal" data-en="From" data-es="Desde">From</span> $1,500 <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ Sprint" data-es="/ Sprint">/ Sprint</span>
+                        <span class="text-xs text-gray-400 font-normal" data-en="From " data-es="Desde ">From </span><span data-en="$1,500" data-es="$28,000 MXN">$1,500</span> <span class="text-xs text-gray-400 font-normal opacity-80" data-en="/ Sprint" data-es="/ Sprint">/ Sprint</span>
                     </div>
                     
                     <div class="pt-4 space-y-3 border-t border-gray-100">
@@ -973,9 +973,9 @@
                 <div class="space-y-1.5">
                     <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Primary Interest" data-es="Interés Principal">Primary Interest</label>
                     <select id="booking-service-select" class="w-full px-4 py-3 rounded-xl creme-input text-sm text-gray-800 focus:outline-none bg-white">
-                        <option value="Online Presence ($1,500 USD)" data-en="Online Presence ($1,500 USD)" data-es="Presencia en Línea ($1,500 USD)">Online Presence ($1,500 USD)</option>
-                        <option value="E-Commerce & Mobile Apps (From $2,500 USD)" data-en="E-Commerce & Mobile Apps (From $2,500 USD)" data-es="E-Commerce y Apps (Desde $2,500 USD)">E-Commerce & Mobile Apps (From $2,500 USD)</option>
-                        <option value="2-Week Product Sprint (From $1,500 USD)" data-en="2-Week Product Sprint (From $1,500 USD)" data-es="Sprint de Producto de 2 Semanas (Desde $1,500 USD)">2-Week Product Sprint (From $1,500 USD)</option>
+                        <option value="Online Presence ($1,500 USD)" data-en="Online Presence ($1,500 USD)" data-es="Presencia en Línea ($28,000 MXN)">Online Presence ($1,500 USD)</option>
+                        <option value="E-Commerce & Mobile Apps (From $2,500 USD)" data-en="E-Commerce & Mobile Apps (From $2,500 USD)" data-es="E-Commerce y Apps (Desde $48,000 MXN)">E-Commerce & Mobile Apps (From $2,500 USD)</option>
+                        <option value="2-Week Product Sprint (From $1,500 USD)" data-en="2-Week Product Sprint (From $1,500 USD)" data-es="Sprint de Producto de 2 Semanas (Desde $28,000 MXN)">2-Week Product Sprint (From $1,500 USD)</option>
                         <option value="AI Optimizations & Agents (Custom Quote)" data-en="AI Optimizations & Agents (Custom Quote)" data-es="Optimizaciones y Agentes de IA (Cotización Personalizada)">AI Optimizations & Agents (Custom Quote)</option>
                         <option value="Managed Tech Stack Support (Retainer)" data-en="Managed Tech Stack Support (Retainer)" data-es="Soporte de Stack Tecnológico (Retainer)">Managed Tech Stack Support (Retainer)</option>
                         <option value="General Strategy Session" data-en="General Strategy Session" data-es="Sesión de Estrategia General">General Strategy Session</option>
@@ -1108,7 +1108,7 @@
     /* --- LANGUAGE DROPDOWN CONTROLS & LIVE TRANSLATION ENGINE --- */
     let currentLang = 'EN';
     const usFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.4h640M0 129.2h640M0 203.1h640M0 276.9h640M0 350.8h640M0 424.6h640"/><path fill="#192f5d" d="M0 0h256.5v258.5H0z"/></svg>`;
-    const spainFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg>`;
+    const mexicoFlagSvg = `<svg class="w-4 h-3 rounded-sm object-cover" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg>`;
 
     function toggleLangDropdown() {
         const dropdown = document.getElementById('lang-dropdown');
@@ -1134,9 +1134,9 @@
         const footerInput = document.getElementById('footer-input');
 
         if (lang === 'ES') {
-            langBtn.innerHTML = `${spainFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">ES</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
+            langBtn.innerHTML = `${mexicoFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">ES</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
             mobileBtnText.textContent = "Español (ES)";
-            mobileFlagIcon.outerHTML = `<svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 750 500"><path fill="#c60b1e" d="M0 0h750v500H0z"/><path fill="#ffc400" d="M0 125h750v250H0z"/></svg>`;
+            mobileFlagIcon.outerHTML = `<svg id="mobile-flag-icon" class="w-5 h-4 rounded-sm object-cover shadow-sm" viewBox="0 0 900 500"><path fill="#006341" d="M0 0h900v500H0z"/><path fill="#fff" d="M300 0h300v500H300z"/><path fill="#ce1126" d="M600 0h300v500H600z"/><circle cx="450" cy="250" r="45" fill="#8B4513"/><circle cx="450" cy="250" r="35" fill="#fff"/><path fill="#006341" d="M440 220h20v60h-20z"/></svg>`;
             checkEn.classList.add('hidden');
             checkEs.classList.remove('hidden');
             if(footerInput) footerInput.placeholder = "Ingresa tu correo...";
@@ -1153,7 +1153,12 @@
         document.querySelectorAll('[data-en]').forEach(el => {
             const translation = el.getAttribute(`data-${lang.toLowerCase()}`);
             if (translation) {
-                el.textContent = translation;
+                if (el.tagName === 'OPTION') {
+                    el.textContent = translation;
+                    el.value = translation;
+                } else {
+                    el.textContent = translation;
+                }
             }
         });
 
