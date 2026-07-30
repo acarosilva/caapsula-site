@@ -19,16 +19,8 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-            },
-            cadmium: {
-              400: '#ffea3d',
-              500: '#FFDE00',
-              600: '#e6c800',
-            }
+            brand: { 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5' },
+            cadmium: { 400: '#ffea3d', 500: '#FFDE00', 600: '#e6c800' }
           }
         }
       }
@@ -89,10 +81,7 @@
     }
 
     @media (min-width: 768px) {
-        .logo-container {
-            width: 200px;
-            height: 200px;
-        }
+        .logo-container { width: 200px; height: 200px; }
     }
 
     .logo-container.expanded {
@@ -108,11 +97,7 @@
         will-change: transform;
     }
 
-    .capsule-bg {
-        fill: #111111;
-        stroke: #222222;
-        stroke-width: 1.5;
-    }
+    .capsule-bg { fill: #111111; stroke: #222222; stroke-width: 1.5; }
 
     .system-console {
         width: 280px;
@@ -126,14 +111,8 @@
         pointer-events: none;
     }
 
-    .metric-row {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .highlight-text {
-        color: #888888;
-    }
+    .metric-row { display: flex; justify-content: space-between; }
+    .highlight-text { color: #888888; }
 
     @keyframes fillAndSpinFull {
         0%, 65% { transform: rotate(0deg); }
@@ -184,20 +163,11 @@
         box-shadow: 0 0 0 4px rgba(255, 222, 0, 0.2);
     }
 
-    html {
-        scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
-    /* --- FIXED DESKTOP NAVBAR SPLIT ON SCROLL --- */
-    #navbar-header {
-        transition: padding 0.3s ease;
-    }
+    #navbar-header { transition: padding 0.3s ease; }
+    #nav-inner-bar { transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease; }
 
-    #nav-inner-bar {
-        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
-    }
-
-    /* Scrolled State for ALL screen sizes */
     body.nav-scrolled #nav-inner-bar {
         background-color: transparent !important;
         border-color: transparent !important;
@@ -207,51 +177,27 @@
         padding-right: 0 !important;
     }
 
-    body.nav-scrolled .logo-wrapper span {
-        color: #111116 !important;
-    }
+    body.nav-scrolled .logo-wrapper span { color: #111116 !important; }
 
-    /* Desktop Specific Scrolled Pill Settings */
     @media (min-width: 768px) {
         body.nav-scrolled #center-nav-pill {
             background-color: rgba(245, 243, 230, 0.85) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border: 1px solid rgba(0, 0, 0, 0.08) !important;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
             padding: 5px 6px 5px 20px !important;
             border-radius: 9999px !important;
         }
 
-        body.nav-scrolled #center-nav-pill a {
-            color: #6b7280 !important;
-        }
-
+        body.nav-scrolled #center-nav-pill a { color: #6b7280 !important; }
         body.nav-scrolled #center-nav-pill a:hover,
-        body.nav-scrolled #center-nav-pill a.active-link {
-            color: #111116 !important;
-            font-weight: 700 !important;
-        }
-
-        body.nav-scrolled #center-nav-pill .cta-btn {
-            background-color: #111116 !important;
-            color: #ffffff !important;
-        }
-
-        /* Scrolled state adjustment for language button text */
-        body.nav-scrolled #lang-btn {
-            background-color: rgba(0, 0, 0, 0.05) !important;
-            border-color: rgba(0, 0, 0, 0.08) !important;
-        }
-        body.nav-scrolled #current-lang-label {
-            color: #111116 !important;
-        }
-        body.nav-scrolled #lang-arrow {
-            color: #6b7280 !important;
-        }
+        body.nav-scrolled #center-nav-pill a.active-link { color: #111116 !important; font-weight: 700 !important; }
+        body.nav-scrolled #center-nav-pill .cta-btn { background-color: #111116 !important; color: #ffffff !important; }
+        body.nav-scrolled #lang-btn { background-color: rgba(0, 0, 0, 0.05) !important; border-color: rgba(0, 0, 0, 0.08) !important; }
+        body.nav-scrolled #current-lang-label { color: #111116 !important; }
+        body.nav-scrolled #lang-arrow { color: #6b7280 !important; }
     }
 
-    /* Mobile Specific Scrolled Burger Button Settings */
     @media (max-width: 767px) {
         body.nav-scrolled .mobile-burger-btn {
             background-color: #111116 !important;
@@ -260,85 +206,28 @@
         }
     }
 
-    /* Modal Animation Classes */
-    #booking-modal {
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    #booking-modal.hidden-modal {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-    #booking-modal.visible-modal {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
-    #booking-modal .modal-content {
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #booking-modal.hidden-modal .modal-content {
-        transform: scale(0.95) translateY(20px);
-    }
-    #booking-modal.visible-modal .modal-content {
-        transform: scale(1) translateY(0);
-    }
+    #booking-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #booking-modal.hidden-modal { opacity: 0; visibility: hidden; pointer-events: none; }
+    #booking-modal.visible-modal { opacity: 1; visibility: visible; pointer-events: auto; }
+    #booking-modal .modal-content { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    #booking-modal.hidden-modal .modal-content { transform: scale(0.95) translateY(20px); }
+    #booking-modal.visible-modal .modal-content { transform: scale(1) translateY(0); }
 
-    /* FAQ Accordion Transitions */
-    .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-        opacity: 0;
-    }
-    .faq-item.active .faq-answer {
-        max-height: 200px;
-        opacity: 1;
-    }
-    .faq-icon {
-        transition: transform 0.3s ease;
-    }
-    .faq-item.active .faq-icon {
-        transform: rotate(45deg);
-    }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease; opacity: 0; }
+    .faq-item.active .faq-answer { max-height: 200px; opacity: 1; }
+    .faq-icon { transition: transform 0.3s ease; }
+    .faq-item.active .faq-icon { transform: rotate(45deg); }
 
-    /* Time Slot Radio styling */
-    .time-slot:checked + label {
-        background-color: #111116;
-        color: #ffffff;
-        border-color: #111116;
-    }
+    .time-slot:checked + label { background-color: #111116; color: #ffffff; border-color: #111116; }
 
-    /* Mobile Menu Drawer Animation */
-    #mobile-menu {
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    #mobile-menu.menu-hidden {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-    #mobile-menu.menu-visible {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
+    #mobile-menu { transition: opacity 0.3s ease, visibility 0.3s ease; }
+    #mobile-menu.menu-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #mobile-menu.menu-visible { opacity: 1; visibility: visible; pointer-events: auto; }
 
-    /* LOGO CAROUSEL INFINITE MARQUEE ANIMATION */
-    @keyframes marquee {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-        display: flex;
-        width: 200%;
-        animation: marquee 25s linear infinite;
-    }
-    .animate-marquee:hover {
-        animation-play-state: paused;
-    }
+    @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+    .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
+    .animate-marquee:hover { animation-play-state: paused; }
 
-    /* MASK FOR CAROUSEL FADE EDGES */
     .carousel-mask {
         mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -385,7 +274,6 @@
                             keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1" />
                     </rect>
                 </clipPath>
-                <!-- ASYMMETRIC LOGO PATH PROFILE -->
                 <path id="pill-shape" d="M 110,10 C 160,10 185,38 185,82 L 185,103 L 135,103 L 135,76 C 135,54 125,43 110,43 C 95,43 85,54 85,76 L 85,144 C 85,166 95,177 110,177 C 125,177 135,166 135,144 L 135,107 L 185,107 L 185,138 C 185,182 160,210 110,210 C 60,210 35,182 35,138 L 35,82 C 35,38 60,10 110,10 Z" />
             </defs>
             <use href="#pill-shape" class="capsule-bg" />
@@ -413,9 +301,6 @@
 
 <!-- 2. MAIN WEBSITE CONTENT -->
 
-<!-- Light Ambient Canvas Background -->
-<canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
-
 <!-- Subtle Yellow Cadmium Ambient Glows -->
 <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#FFDE00]/15 rounded-full blur-[180px] pointer-events-none z-0"></div>
 <div class="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-300/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
@@ -424,7 +309,6 @@
 <header id="navbar-header" class="fixed top-0 left-0 right-0 z-40 px-6 py-6">
     <div id="nav-inner-bar" class="max-w-7xl mx-auto flex items-center justify-between px-5 py-3 rounded-full bg-black/90 backdrop-blur-xl border border-white/10 text-white shadow-2xl">
         
-        <!-- Logo Wrapper (Left) -->
         <a href="#" class="logo-wrapper flex items-center gap-3 group">
             <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-1 shrink-0 border border-white/20 shadow-sm">
                 <svg viewBox="0 0 220 220" class="w-full h-full">
@@ -434,7 +318,6 @@
             <span class="font-extrabold tracking-wider text-sm text-white uppercase transition-colors">CAAPSULA</span>
         </a>
 
-        <!-- Center Navigation Pill -->
         <div id="center-nav-pill" class="flex items-center gap-4">
             <nav class="hidden md:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider text-gray-300">
                 <a href="#about" class="nav-link transition-colors" data-en="About" data-es="Acerca de">About</a>
@@ -448,14 +331,12 @@
                     Book a Call
                 </button>
                 
-                <!-- Desktop Language Dropdown Component with SVG Flags (Mexico / USA) -->
                 <div class="relative">
                     <button onclick="toggleLangDropdown()" id="lang-btn" class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-full border border-white/10 hover:bg-white/20 transition-all focus:outline-none">
                         <svg class="w-4 h-3 rounded-sm object-cover shadow-sm" id="desktop-flag"><use href="#flag-us"></use></svg>
                         <span class="text-[11px] font-bold uppercase tracking-wider text-white" id="current-lang-label">EN</span>
                         <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>
                     </button>
-                    <!-- Dropdown Menu -->
                     <div id="lang-dropdown" class="absolute right-0 mt-2 w-36 bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                         <button onclick="switchLanguage('EN')" class="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                             <span class="flex items-center gap-2">
@@ -476,7 +357,6 @@
             </div>
         </div>
 
-        <!-- Mobile Burger Toggle Button -->
         <button onclick="toggleMobileMenu()" class="mobile-burger-btn md:hidden w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300">
             <span class="text-lg font-bold">☰</span>
         </button>
@@ -484,7 +364,6 @@
     </div>
 </header>
 
-<!-- Mobile Navigation Drawer Overlay -->
 <div id="mobile-menu" class="fixed inset-0 z-50 flex flex-col justify-between p-8 bg-black/95 backdrop-blur-2xl text-white menu-hidden">
     <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -510,7 +389,6 @@
             Book a Call
         </button>
         
-        <!-- Mobile Language Selector Accordion -->
         <div class="relative">
             <button onclick="toggleMobileLangDropdown()" id="mobile-lang-btn" class="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 transition-all">
                 <div class="flex items-center gap-3">
@@ -519,7 +397,6 @@
                 </div>
                 <span class="text-sm text-gray-400 font-bold transition-transform duration-200" id="mobile-lang-arrow">▼</span>
             </button>
-            <!-- Mobile Dropdown Menu -->
             <div id="mobile-lang-dropdown" class="absolute bottom-full left-0 mb-2 w-full bg-[#111116] border border-white/10 rounded-2xl shadow-2xl py-2 hidden z-50">
                 <button onclick="switchLanguage('EN');" class="w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors">
                     <span class="flex items-center gap-3">
@@ -540,10 +417,8 @@
     </div>
 </div>
 
-<!-- Main Content Area -->
 <main class="relative z-10 space-y-32 pt-32 pb-20">
 
-    <!-- HERO SECTION -->
     <section class="max-w-7xl mx-auto px-6 pt-12 md:pt-20">
         <div class="grid md:grid-cols-12 gap-12 items-center">
             
@@ -570,11 +445,10 @@
                 </div>
             </div>
 
-            <!-- Featured Video Capsule Card -->
             <div class="md:col-span-5 relative perspective-1000">
                 <div id="hero-tilt-card" class="creme-card rounded-3xl p-4 relative overflow-hidden group cursor-pointer">
-                    <div class="relative h-96 w-full rounded-2xl overflow-hidden">
-                        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <div class="relative h-96 w-full rounded-2xl overflow-hidden bg-black">
+                        <video autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover">
                             <source src="https://cdn.coverr.co/videos/coverr-working-in-a-lab-5170/1080p.mp4" type="video/mp4">
                         </video>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -589,7 +463,6 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
     <section id="about" class="max-w-7xl mx-auto px-6 page-section">
         <div class="creme-card rounded-3xl p-8 md:p-16 relative overflow-hidden bg-white">
             <div class="max-w-3xl space-y-6">
@@ -604,13 +477,9 @@
         </div>
     </section>
 
-    <!-- STATS METRICS & MOVING LOGO CAROUSEL -->
     <section class="max-w-7xl mx-auto px-6 space-y-16">
         
-        <!-- Three Stat Cards Grid -->
         <div class="grid md:grid-cols-3 gap-6">
-            
-            <!-- Stat 1 -->
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Products Built" data-es="Productos Creados">Products Built</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
@@ -618,7 +487,6 @@
                 </div>
             </div>
 
-            <!-- Stat 2 -->
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Client Funding" data-es="Financiamiento de Clientes">Client Funding</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
@@ -626,17 +494,14 @@
                 </div>
             </div>
 
-            <!-- Stat 3 -->
             <div class="creme-card rounded-3xl p-8 md:p-10 space-y-8 bg-white/80 flex flex-col justify-between">
                 <span class="text-xs font-semibold text-gray-500 tracking-tight" data-en="Total VC investments in our clients" data-es="Inversiones VC totales en nuestros clientes">Total VC investments in our clients</span>
                 <div class="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 bg-clip-text text-transparent inline-block tracking-tight">
                     10+
                 </div>
             </div>
-
         </div>
 
-        <!-- Moving Brand Logo Carousel -->
         <div class="space-y-8 pt-4">
             <p class="text-center text-xs font-semibold text-gray-400 tracking-wide uppercase" data-en="Trusted by industry leaders" data-es="Con la confianza de líderes de la industria">
                 Trusted by industry leaders
@@ -644,8 +509,6 @@
 
             <div class="overflow-hidden carousel-mask py-4">
                 <div class="animate-marquee items-center gap-16 text-gray-400 font-bold text-xl uppercase tracking-widest">
-                    
-                    <!-- First Set of Logos -->
                     <div class="flex items-center gap-16 shrink-0 h-10">
                         <img src="adidas-13.png" alt="Adidas" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                         <img src="bbva-2.png" alt="BBVA" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
@@ -657,8 +520,6 @@
                         <img src="redbullenergydrink.png" alt="Red Bull" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                         <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                     </div>
-
-                    <!-- Duplicate Set for Seamless Loop -->
                     <div class="flex items-center gap-16 shrink-0 h-10">
                         <img src="adidas-13.png" alt="Adidas" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                         <img src="bbva-2.png" alt="BBVA" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
@@ -670,14 +531,13 @@
                         <img src="redbullenergydrink.png" alt="Red Bull" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                         <img src="SAE_international_logo-e1737754099982.png" alt="SAE Institute" loading="lazy" decoding="async" class="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity filter grayscale contrast-200 brightness-75">
                     </div>
-
                 </div>
             </div>
         </div>
 
     </section>
 
-    <!-- SERVICES & OFFERINGS SECTION -->
+    <!-- SERVICES SECTION -->
     <section id="services" class="max-w-7xl mx-auto px-6 space-y-12 page-section">
         <div class="text-center max-w-2xl mx-auto space-y-3">
             <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold" data-en="Flexible Pricing" data-es="Precios Flexibles">Flexible Pricing</span>
@@ -688,10 +548,8 @@
             <p class="text-gray-500 text-sm pt-2" data-en="Flexible pricing options designed to match your exact business stage." data-es="Opciones de precios flexibles diseñadas para adaptarse exactamente a tu etapa de negocio.">Flexible pricing options designed to match your exact business stage.</p>
         </div>
 
-        <!-- CENTERED FLEX/GRID CONTAINER -->
         <div class="grid md:grid-cols-2 lg:flex lg:flex-wrap lg:justify-center gap-8 items-stretch">
             
-            <!-- Card 1: Online Presence -->
             <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🌐</div>
@@ -720,7 +578,6 @@
                 <button onclick="openBookingModal('Online Presence ($1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
             </div>
 
-            <!-- Card 2: E-Commerce & Apps -->
             <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">⚡</div>
@@ -749,7 +606,6 @@
                 <button onclick="openBookingModal('E-Commerce & Mobile Apps (From $2,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book a Call" data-es="Agendar Llamada">Book a Call</button>
             </div>
 
-            <!-- Card 3: Product Sprints -->
             <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🚀</div>
@@ -777,7 +633,6 @@
                 <button onclick="openBookingModal('2-Week Product Sprint (From $1,500 USD)')" class="w-full py-3.5 text-center bg-gray-900 rounded-full text-xs font-semibold text-white hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 shadow-sm" data-en="Book Sprint" data-es="Agendar Sprint">Book Sprint</button>
             </div>
 
-            <!-- Card 4: AI Agents & Upgrades -->
             <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-xl">🤖</div>
@@ -803,7 +658,6 @@
                 <button onclick="openBookingModal('AI Optimizations & Agents (Custom Quote)')" class="w-full py-3.5 text-center bg-[#FFDE00] rounded-full text-xs font-extrabold text-gray-900 hover:bg-[#e6c800] active:scale-95 transition-all duration-200 shadow-sm" data-en="Request Quote" data-es="Solicitar Cotización">Request Quote</button>
             </div>
 
-            <!-- Card 5: Managed Tech Stack Support -->
             <div class="creme-card rounded-3xl p-8 space-y-6 flex flex-col justify-between bg-white border-2 border-yellow-400/40 lg:w-[calc(33.333%-1.5rem)]">
                 <div class="space-y-5">
                     <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 font-bold text-xl">🛠</div>
@@ -843,9 +697,8 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
-            
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
-                <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
+                <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6 bg-gray-100">
                     <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <source data-src="https://cdn.coverr.co/videos/coverr-virtual-reality-headset-5051/1080p.mp4" type="video/mp4">
                     </video>
@@ -857,7 +710,7 @@
             </div>
 
             <div class="tilt-project creme-card rounded-3xl p-4 overflow-hidden group cursor-pointer bg-white">
-                <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6">
+                <div class="relative h-72 w-full rounded-2xl overflow-hidden mb-6 bg-gray-100">
                     <video muted loop playsinline class="lazy-video w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <source data-src="https://cdn.coverr.co/videos/coverr-online-shopping-5190/1080p.mp4" type="video/mp4">
                     </video>
@@ -867,7 +720,6 @@
                     <p class="text-gray-500 text-sm leading-relaxed" data-en="Customer-centric ecommerce platform integrating digital storytelling." data-es="Plataforma de ecommerce centrada en el cliente que integra narrativa digital.">Customer-centric ecommerce platform integrating digital storytelling.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -880,7 +732,6 @@
         </div>
 
         <div class="space-y-4">
-            
             <div class="faq-item creme-card rounded-2xl p-6 bg-white cursor-pointer" onclick="toggleFaq(this)">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-900" data-en="What is CAAPSULA?" data-es="¿Qué es CAAPSULA?">What is CAAPSULA?</h3>
@@ -920,7 +771,6 @@
                     If you don't have an in-house engineering team, we take total ownership of your website, e-commerce, hosting, domain routing, security patches, and continuous optimizations under a single custom monthly retainer.
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -947,7 +797,6 @@
             </div>
 
             <form id="booking-form" class="space-y-6" onsubmit="handleBookingSubmit(event)">
-                
                 <div class="grid md:grid-cols-2 gap-6 p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
                     <div class="space-y-2">
                         <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider" data-en="Select Date" data-es="Seleccionar Fecha">Select Date</label>
@@ -1029,7 +878,6 @@
 <!-- CREME DIGITAL SIGNATURE DARK FOOTER -->
 <footer class="relative z-10 max-w-7xl mx-auto px-6 pb-12 pt-6">
     <div class="bg-[#0d0d11] text-white rounded-3xl p-8 md:p-14 space-y-12 shadow-2xl">
-        
         <div class="max-w-none space-y-4 text-left md:text-center">
             <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight" data-en="Subscribe to CAAPSULA" data-es="Suscríbete a CAAPSULA">Subscribe to CAAPSULA</h3>
             <p class="text-gray-400 text-xs md:text-sm" data-en="The partner for founders building culture-driven digital products and platforms." data-es="El socio para fundadores que construyen productos y plataformas digitales impulsados por la cultura.">The partner for founders building culture-driven digital products and platforms.</p>
@@ -1068,7 +916,6 @@
                 <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
             </div>
         </div>
-
     </div>
 </footer>
 
@@ -1106,23 +953,20 @@
     /* 20-Click Bypass Trigger on Logo */
     wrapper.addEventListener('click', () => {
         clickCount++;
-
-        // Visual bounce pulse on each click
         wrapper.classList.add('expanded');
         setTimeout(() => {
             wrapper.classList.remove('expanded');
             handleReset();
         }, 150);
 
-        // Check for 20 clicks to dismiss loader and restore scrolling
         if (clickCount >= 20) {
             stealthLoader.style.opacity = '0';
             stealthLoader.style.visibility = 'hidden';
-            document.body.style.overflow = ''; // Restores full scrolling capabilities
+            document.body.style.overflow = '';
         }
     });
 
-    /* --- LAZY LOAD VIDEOS --- */
+    /* --- LAZY LOAD VIDEOS OBSERVER --- */
     document.addEventListener("DOMContentLoaded", function() {
         let lazyVideos = [].slice.call(document.querySelectorAll("video.lazy-video"));
         if ("IntersectionObserver" in window) {
@@ -1177,7 +1021,7 @@
 
         if (lang === 'ES') {
             langBtn.innerHTML = `${mexicoFlagSvg} <span class="text-[11px] font-bold uppercase tracking-wider" id="current-lang-label">ES</span> <span class="text-[10px] text-gray-400 font-bold transition-transform duration-200" id="lang-arrow">▼</span>`;
-            mobileBtnText.textContent = "Español (MX)";
+            mobileBtnText.textContent = "Español (ES)";
             mobileFlagIconContainer.innerHTML = `${mexicoFlagSvg} <span class="text-xs font-bold uppercase tracking-wider text-white" id="mobile-lang-text">Español (MX)</span>`;
             checkEn.classList.add('hidden');
             checkEs.classList.remove('hidden');
@@ -1191,7 +1035,6 @@
             if(footerInput) footerInput.placeholder = "Enter email...";
         }
 
-        // Apply text translation across all elements with data-en / data-es attributes
         document.querySelectorAll('[data-en]').forEach(el => {
             const translation = el.getAttribute(`data-${lang.toLowerCase()}`);
             if (translation) {
@@ -1204,19 +1047,16 @@
             }
         });
 
-        // Close dropdowns after selection
         document.getElementById('lang-dropdown').classList.add('hidden');
         const mobileDropdown = document.getElementById('mobile-lang-dropdown');
         if (mobileDropdown) mobileDropdown.classList.add('hidden');
         
-        // Reset dropdown arrows
         const desktopArrow = document.getElementById('lang-arrow');
         if(desktopArrow) desktopArrow.style.transform = 'rotate(0deg)';
         const mobileArrow = document.getElementById('mobile-lang-arrow');
         if(mobileArrow) mobileArrow.style.transform = 'rotate(0deg)';
     }
 
-    // Close dropdowns when clicking outside
     window.addEventListener('click', (e) => {
         const desktopLang = document.getElementById('lang-btn');
         const desktopDropdown = document.getElementById('lang-dropdown');
@@ -1243,7 +1083,7 @@
         { status: "حالة_النظام:", node: "عقدة_الشبكة:", time: "وقت_النظام:" },
         { status: "系统状态:", node: "网络节点:", time: "系统时间:" },
         { status: "システム状態:", node: "ネットワークノード:", time: "システム時間:" },
-        { status: "システム_상태:", node: "네트워크_노드:", time: "시스템_시간:" },
+        { status: "システム_상태:", node: "네트워크_노드:", time: "システム_시간:" },
         { status: "STATO_SYS:", node: "NODO_RETE:", time: "TEMPO_SYS:" },
         { status: "ΚΑΤΑΣΤΑΣΗ_ΣΥΣ:", node: "ΚΟΜΒΟΣ_ΔΙΚΤΥΟΥ:", time: "ΧΡΟΝΟΣ_ΣΥΣ:" },
         { status: "STATUS_SYS:", node: "NÓ_DE_REDE:", time: "TEMPO_SYS:" },
@@ -1367,9 +1207,8 @@
 
     function openBookingModal(defaultService = '') {
         if (defaultService && bookingServiceSelect) {
-            // Find the option element based on current language translation
             const option = Array.from(bookingServiceSelect.options).find(opt => 
-                opt.getAttribute('data-en').includes(defaultService.split(' ')[0]) // fuzzy match on primary interest
+                opt.getAttribute('data-en').includes(defaultService.split(' ')[0])
             );
             if (option) {
                 bookingServiceSelect.value = option.value;
@@ -1408,55 +1247,6 @@
             element.classList.add('active');
         }
     }
-
-    /* --- LIGHT CANVAS PARTICLES --- */
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 1.5 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.2;
-            this.speedY = (Math.random() - 0.5) * 0.2;
-            this.opacity = Math.random() * 0.15 + 0.05;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-            ctx.fillStyle = `rgba(0, 0, 0, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 40; i++) {
-        particles.push(new Particle());
-    }
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
 
     /* --- 3D CARD TILT FX --- */
     function applyTiltEffect(element) {
